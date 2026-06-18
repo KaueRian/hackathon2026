@@ -254,8 +254,8 @@
 - [x] Todos os anti-patterns funcionando corretamente em cada tela
 - [x] Ranking salvando e exibindo tempos
 - [x] Versão corrigida (`/corrigido`) funcionando
-- [ ] Responsivo em mobile (dinâmica do evento usa QR Code)
-- [ ] Testar com colegas e coletar feedback
+- [x] Responsivo em mobile (dinâmica do evento usa QR Code)
+- [x] Testar com colegas e coletar feedback
 - [x] Commit final e push para `main` antes de 19/06 23h59
 
 ---
