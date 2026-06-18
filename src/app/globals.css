@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-:root {
 @theme {
   --font-sans: var(--font-comic);
   --font-mono: var(--font-geist-mono);
