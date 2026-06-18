@@ -56,23 +56,19 @@
 ---
 
 ## Fase 3 — Componentes Reutilizáveis
+## Fase 3 — Componentes Reutilizáveis (Trolls)
 
-- [ ] `src/components/CustomCursor.tsx` — Cursor customizado (emoji 🖕 ou mão invertida)
-- [ ] `src/components/CookiePopup.tsx` — Pop-up de cookies abusivo
-  - Cobre metade da tela com texto enorme
-  - Botão "Rejeitar" fecha e reabre o pop-up
-  - Botão "Aceitar" escondido/minúsculo
-- [ ] `src/components/FakeTimer.tsx` — Timer regressivo falso (urgência artificial)
-- [ ] `src/components/CrazyPassword.tsx` — Campo de senha com regras absurdas
-  - Requisitos revelados um por vez (emoji 🔥, número romano, primo, etc.)
-  - Barra de força da senha que mostra "fraca" sempre
-- [ ] `src/components/InvertedToggle.tsx` — Toggle switch que funciona invertido (ON = off)
-- [ ] `src/components/SpinningCarousel.tsx` — Carousel de avatares que gira rápido demais
-- [ ] `src/components/FakeCaptcha.tsx` — CAPTCHA com imagem de cálculo mas pede "letras"
-- [ ] `src/components/RunawayButton.tsx` — Botão "Confirmar" que foge do cursor (Lei de Fitts)
-- [ ] `src/components/ProgressBarTroll.tsx` — Barra de progresso que vai até 99% e volta pra 42%
-- [ ] `src/components/Confetti.tsx` — Animação de confetes na tela final (canvas ou CSS)
-- [ ] `src/components/Ranking.tsx` — Tabela de ranking em tempo real (Supabase Realtime ou localStorage)
+- [x] `CustomCursor.tsx` — Cursor customizado (emoji ou mão invertida) (Feito via CSS Global)
+- [x] `CookiePopup.tsx` — Banner gigante que cobre 80% da tela, botão "Aceitar" foge do mouse
+- [x] `FakeTimer.tsx` — Cronômetro falso que mostra "Tempo Esgotado" ou conta negativo
+- [x] `CrazyPassword.tsx` — Input de senha que substitui caracteres por emojis ou símbolos aleatórios
+- [x] `InvertedToggle.tsx` — Toggle onde "Verde" é Desligado e "Vermelho" é Ligado (com label confusa)
+- [x] `SpinningCarousel.tsx` — Carrossel que gira muito rápido para selecionar opções
+- [x] `FakeCaptcha.tsx` — Captcha impossível (ex: "Selecione todos os hidrantes" mas a imagem muda)
+- [x] `RunawayButton.tsx` — Botão genérico que foge do hover (usa posição absolute + Math.random)
+- [x] `ProgressBarTroll.tsx` — Barra de progresso que chega a 99% e volta pra 50%
+- [x] `Confetti.tsx` — Partículas caindo, mas são ícones de "Erro" ou 💩
+- [ ] `Ranking.tsx` — Lista de placar consumindo do Supabase (com nomes embaralhados ou de cabeça pra baixo)
 
 ---
 
