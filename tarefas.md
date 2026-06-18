@@ -19,7 +19,7 @@
   ```bash
   npm install @cloudflare/next-on-pages
   ```
-- [ ] Criar arquivo `.env.local` com variáveis do Supabase
+- [X] Criar arquivo `.env.local` com variáveis do Supabase
   - `NEXT_PUBLIC_SUPABASE_URL`
   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 - [ ] Criar estrutura de pastas conforme PRD (`components/`, `lib/`, `hooks/`, `public/images/`, `public/sounds/`)
@@ -29,25 +29,25 @@
 ## Fase 2 — Infraestrutura & Utilitários
 
 ### Lib
-- [ ] `src/lib/supabase.ts` — Cliente Supabase configurado com variáveis de ambiente
-- [ ] `src/lib/sessionStore.ts` — Estado global do progresso do usuário (persiste em `sessionStorage`)
+- [x] `src/lib/supabase.ts` — Cliente Supabase configurado com variáveis de ambiente
+- [x] `src/lib/sessionStore.ts` — Estado global do progresso do usuário (persiste em `sessionStorage`)
   - Armazenar: dados pessoais, senha, preferências, timestamp de início
   - Funções: `startSession()`, `saveStepData()`, `getSessionData()`, `clearSession()`
-- [ ] `src/lib/uxViolations.ts` — Catálogo de todas as violações de UX para documentação/exibição
+- [x] `src/lib/uxViolations.ts` — Catálogo de todas as violações de UX para documentação/exibição
 
 ### Hooks
-- [ ] `src/hooks/useTimer.ts` — Cronômetro que inicia na Landing e para na tela Parabéns (formato MM:SS)
-- [ ] `src/hooks/useFormState.ts` — Hook genérico para gerenciar estado dos formulários por página
+- [x] `src/hooks/useTimer.ts` — Cronômetro que inicia na Landing e para na tela Parabéns (formato MM:SS)
+- [x] `src/hooks/useFormState.ts` — Hook genérico para gerenciar estado dos formulários por página
 
 ### Layout Raiz
-- [ ] `src/app/layout.tsx` — Layout raiz com:
+- [x] `src/app/layout.tsx` — Layout raiz com:
   - Cursor customizado aplicado globalmente
   - Meta tags SEO (title, description)
   - Importação de fontes (Google Fonts — algo feio/inconsistente de propósito)
   - Provider do sessionStore
 
 ### CSS Global
-- [ ] `src/app/globals.css` — Tema visual "horrível" mas funcional
+- [x] `src/app/globals.css` — Tema visual "horrível" mas funcional
   - Cores berrantes, gradientes agressivos
   - Cursor customizado (`cursor: url(...)`)
   - Animações CSS (piscar, tremer, girar)
