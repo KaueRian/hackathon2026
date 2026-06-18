@@ -7,15 +7,15 @@
 
 ## Fase 1 — Setup do Projeto
 
-- [ ] Inicializar Next.js 15 com App Router, TypeScript, Tailwind CSS 4, ESLint, src dir
+- [x] Inicializar Next.js 15 com App Router, TypeScript, Tailwind CSS 4, ESLint, src dir
   ```bash
   npx -y create-next-app@latest ./ --typescript --tailwind --app --eslint --src-dir --import-alias "@/*" --use-npm
   ```
-- [ ] Instalar dependências adicionais
+- [x] Instalar dependências adicionais
   ```bash
   npm install @supabase/supabase-js framer-motion lucide-react
   ```
-- [ ] Instalar adapter Cloudflare Pages (se necessário)
+- [x] Instalar adapter Cloudflare Pages (se necessário)
   ```bash
   npm install @cloudflare/next-on-pages
   ```
