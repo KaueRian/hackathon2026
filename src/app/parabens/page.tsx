@@ -13,7 +13,7 @@ export default function ParabensPage() {
   const { formattedTime, elapsed } = useTimer();
   const [nickname, setNickname] = useState("");
   const [saved, setSaved] = useState(false);
-  const [ranking, setRanking] = useState<{ nickname: string; elapsed_seconds: number }[]>([]);
+  const [ranking, setRanking] = useState<{ nickname: string; duration_seconds: number }[]>([]);
   const [saving, setSaving] = useState(false);
 
   const fetchRanking = async () => {
