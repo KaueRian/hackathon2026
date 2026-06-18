@@ -47,7 +47,7 @@ export default function CorrigidoPage() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
     const val = type === "checkbox" ? checked : value;
-    
+
     // Auto-formatting
     let formattedVal = val;
     if (name === "nascimento" && typeof val === "string") {
@@ -58,7 +58,7 @@ export default function CorrigidoPage() {
     }
 
     setFormData(prev => ({ ...prev, [name]: formattedVal }));
-    
+
     if (touched[name]) {
       setErrors(prev => ({ ...prev, [name]: validate(name, formattedVal) }));
     }
@@ -90,9 +90,21 @@ export default function CorrigidoPage() {
   return (
     <div className="min-h-screen bg-gray-50 font-sans text-gray-900 cursor-default">
       {/* Override global CSS troll properties */}
-      <style dangerouslySetInnerHTML={{__html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         body { cursor: auto !important; }
         * { animation: none !important; }
+        input[type="text"], input[type="password"], input[type="email"] {
+          border: 1px solid #d1d5db !important;
+          background-color: #ffffff !important;
+          color: #111827 !important;
+          border-radius: 0.75rem !important;
+        }
+        input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+          border-color: #3b82f6 !important;
+          background-color: #ffffff !important;
+          color: #111827 !important;
+        }
       `}} />
 
       <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
@@ -126,7 +138,7 @@ export default function CorrigidoPage() {
             </div>
             <h3 className="text-2xl font-bold text-gray-900 mb-2">Cadastro Concluído!</h3>
             <p className="text-gray-500 mb-6">Seus dados foram processados com sucesso. Viu como foi fácil quando o sistema trabalha a seu favor?</p>
-            <button 
+            <button
               onClick={() => setSubmitted(false)}
               className="w-full bg-blue-600 text-white font-semibold py-3 px-4 rounded-xl hover:bg-blue-700 transition-colors focus:ring-4 focus:ring-blue-100 outline-none"
             >
@@ -135,7 +147,7 @@ export default function CorrigidoPage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            
+
             {/* Esquerda: Explicações (Heurísticas) */}
             <div className="lg:col-span-5 flex flex-col gap-6">
               <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6">
@@ -197,7 +209,7 @@ export default function CorrigidoPage() {
                       value={formData.nome}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      className={`clean-input w-full px-4 py-3 rounded-xl border ${errors.nome ? "border-red-500 focus:ring-red-100" : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"} outline-none focus:ring-4 transition-all`}
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.nome ? "border-red-500 focus:ring-red-100" : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"} outline-none focus:ring-4 transition-all`}
                     />
                     {errors.nome && (
                       <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
@@ -219,7 +231,7 @@ export default function CorrigidoPage() {
                       value={formData.email}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      className={`clean-input w-full px-4 py-3 rounded-xl border ${errors.email ? "border-red-500 focus:ring-red-100" : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"} outline-none focus:ring-4 transition-all`}
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.email ? "border-red-500 focus:ring-red-100" : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"} outline-none focus:ring-4 transition-all`}
                     />
                     {errors.email && (
                       <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
@@ -241,7 +253,7 @@ export default function CorrigidoPage() {
                       value={formData.nascimento}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      className={`clean-input w-full px-4 py-3 rounded-xl border ${errors.nascimento ? "border-red-500 focus:ring-red-100" : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"} outline-none focus:ring-4 transition-all`}
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.nascimento ? "border-red-500 focus:ring-red-100" : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"} outline-none focus:ring-4 transition-all`}
                     />
                     {errors.nascimento && (
                       <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
@@ -263,7 +275,7 @@ export default function CorrigidoPage() {
                       value={formData.telefone}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      className="clean-input w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-blue-100 outline-none focus:ring-4 transition-all"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-blue-100 outline-none focus:ring-4 transition-all"
                     />
                   </div>
 
@@ -280,7 +292,7 @@ export default function CorrigidoPage() {
                       value={formData.senha}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      className={`clean-input w-full px-4 py-3 rounded-xl border ${errors.senha ? "border-red-500 focus:ring-red-100" : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"} outline-none focus:ring-4 transition-all`}
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.senha ? "border-red-500 focus:ring-red-100" : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"} outline-none focus:ring-4 transition-all`}
                     />
                     {errors.senha && (
                       <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
@@ -302,7 +314,7 @@ export default function CorrigidoPage() {
                       value={formData.confirmarSenha}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      className={`clean-input w-full px-4 py-3 rounded-xl border ${errors.confirmarSenha ? "border-red-500 focus:ring-red-100" : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"} outline-none focus:ring-4 transition-all`}
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.confirmarSenha ? "border-red-500 focus:ring-red-100" : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"} outline-none focus:ring-4 transition-all`}
                     />
                     {errors.confirmarSenha && (
                       <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
