@@ -19,8 +19,8 @@ export default function ParabensPage() {
   const fetchRanking = async () => {
     const { data } = await supabase
       .from("sessions")
-      .select("nickname, elapsed_seconds")
-      .order("elapsed_seconds", { ascending: true })
+      .select("nickname, duration_seconds")
+      .order("duration_seconds", { ascending: true })
       .limit(10);
     if (data) setRanking(data);
   };
@@ -39,7 +39,7 @@ export default function ParabensPage() {
 
     const { error } = await supabase.from("sessions").insert({
       nickname: nickname.trim(),
-      elapsed_seconds: elapsedSeconds,
+      duration_seconds: elapsedSeconds,
     });
 
     if (error) {
@@ -129,7 +129,7 @@ export default function ParabensPage() {
                     <tr key={i} className="border-b border-gray-200">
                       <td className="py-2 font-bold">{i + 1}</td>
                       <td className="py-2 font-mono">{scrambled}</td>
-                      <td className="py-2 text-right font-mono">{formatTime(r.elapsed_seconds)}</td>
+                      <td className="py-2 text-right font-mono">{formatTime(r.duration_seconds)}</td>
                     </tr>
                   );
                 })}

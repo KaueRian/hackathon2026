@@ -40,7 +40,7 @@ function isValidSave(nickname: string, elapsed: number): boolean {
 
 // ─── Mock do insert do Supabase ──────────────────────────────────────────────
 
-type InsertPayload = { nickname: string; elapsed_seconds: number };
+type InsertPayload = { nickname: string; duration_seconds: number };
 
 function createMockSupabase() {
   const insertedRows: InsertPayload[] = [];
@@ -149,14 +149,14 @@ describe("handleSave — mock do Supabase insert", () => {
 
     const payload: InsertPayload = {
       nickname: nickname.trim(),
-      elapsed_seconds: computeElapsedSeconds(elapsed),
+      duration_seconds: computeElapsedSeconds(elapsed),
     };
 
     await db.from().insert(payload);
 
     expect(db.insertedRows).toHaveLength(1);
     expect(db.insertedRows[0].nickname).toBe("Guerreiro");
-    expect(db.insertedRows[0].elapsed_seconds).toBe(245); // NÃO 0
+    expect(db.insertedRows[0].duration_seconds).toBe(245); // NÃO 0
   });
 
   test("não insere quando nickname está vazio", async () => {
@@ -170,14 +170,14 @@ describe("handleSave — mock do Supabase insert", () => {
       return;
     }
 
-    await db.from().insert({ nickname, elapsed_seconds: elapsed });
+    await db.from().insert({ nickname, duration_seconds: elapsed });
   });
 
   test("retorna erro quando Supabase falha", async () => {
     const db = createMockSupabase();
     db.setShouldFail(true);
 
-    const result = await db.from().insert({ nickname: "Guerreiro", elapsed_seconds: 120 });
+    const result = await db.from().insert({ nickname: "Guerreiro", duration_seconds: 120 });
 
     expect(result.error).toBeTruthy();
     expect(result.data).toBeNull();
@@ -185,8 +185,8 @@ describe("handleSave — mock do Supabase insert", () => {
 
   test("após save, busca ranking e retorna registros inseridos", async () => {
     const db = createMockSupabase();
-    await db.from().insert({ nickname: "Alice", elapsed_seconds: 90 });
-    await db.from().insert({ nickname: "Bob", elapsed_seconds: 120 });
+    await db.from().insert({ nickname: "Alice", duration_seconds: 90 });
+    await db.from().insert({ nickname: "Bob", duration_seconds: 120 });
 
     const { data } = await db.from().select();
 
