@@ -74,13 +74,13 @@
 
 ## Fase 4 — Tela 0: Landing Page (`src/app/page.tsx`)
 
-- [ ] Botão gigante "NÃO, OBRIGADO" que é decorativo / não leva a lugar nenhum
-- [ ] Link real "clique aqui" quase imperceptível (texto minúsculo, cor próxima ao fundo)
-- [ ] Integrar componente `FakeTimer` (urgência artificial)
-- [ ] Integrar componente `CookiePopup` (pop-up inescapável)
-- [ ] Cursor customizado ativo
-- [ ] Visual chamativo mas confuso (cores berrantes, animações)
-- [ ] Ao clicar no link real → navegar para `/dados-pessoais` e iniciar cronômetro
+- [x] Botão gigante "NÃO, OBRIGADO" que é decorativo / não leva a lugar nenhum
+- [x] Link real "clique aqui" quase imperceptível (texto minúsculo, cor próxima ao fundo)
+- [x] Integrar componente `FakeTimer` (urgência artificial)
+- [x] Integrar componente `CookiePopup` (pop-up inescapável)
+- [x] Cursor customizado ativo
+- [x] Visual chamativo mas confuso (cores berrantes, animações)
+- [x] Ao clicar no link real → navegar para `/dados-pessoais` e iniciar cronômetro
 
 ### Princípios violados nesta tela:
 - Affordance, Visibilidade, Dark Pattern (urgência), Controle do usuário
