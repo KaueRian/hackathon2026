@@ -38,15 +38,15 @@
 ### ✅ Exemplo de senha que passa em todos os requisitos:
 
 ```
-IV🔥Az9mxqp2
+IV🔥az9mxqp2t
 ```
 
 **Por quê essa senha funciona?**
-- ✅ Tem 12+ caracteres
+- ✅ Tem 12 caracteres (contando o emoji 🔥 como 1)
 - ✅ Contém o emoji `🔥`
 - ✅ Contém numeral romano: `IV`
-- ✅ Não tem letras consecutivas no alfabeto (`m` e `x` não são consecutivas)
-- ✅ Tem exatamente 2 letras maiúsculas: `A` e `z`... (ajuste se precisar: `Az`)
+- ✅ Não tem letras consecutivas (verifique: i-v ✓, a-z ✓, m-x ✓, q-p ✓, p-t ✓)
+- ✅ Tem exatamente 2 letras maiúsculas: `I` e `V`
 - ✅ Soma dos dígitos: `9 + 2 = 11` (número primo ✓)
 
 > ⚠️ Não fique parado por mais de **10 segundos** — o campo apaga sozinho!
@@ -55,7 +55,7 @@ IV🔥Az9mxqp2
 
 Digite a senha **de trás para frente**.
 
-Exemplo: se sua senha é `IV🔥Az9mxqp2`, confirme com `2pqxm9zA🔥VI`
+Exemplo: se sua senha é `IV🔥az9mxqp2t`, confirme com `t2pqxm9za🔥VI`
 
 ### Pergunta de Segurança:
 

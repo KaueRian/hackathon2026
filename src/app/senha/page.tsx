@@ -63,7 +63,7 @@ export default function SenhaPage() {
 
   // Requirements revealed progressively
   const requirements = [
-    { label: "✅ Mínimo 12 caracteres", met: senha.length >= 12 },
+    { label: "✅ Mínimo 12 caracteres", met: Array.from(senha).length >= 12 },
     { label: "🔥 Deve conter o emoji 🔥", met: hasEmoji(senha) },
     { label: "📜 Deve conter numeral romano (I, V, X, L, C, D ou M)", met: hasRomanNumeral(senha) },
     { label: "🔤 Não pode conter letras consecutivas (ex: 'ab', 'cd')", met: !hasConsecutiveLetters(senha) && senha.length > 0 },
@@ -105,8 +105,8 @@ export default function SenhaPage() {
       return false;
     }
 
-    // Confirmation must be typed backwards
-    const reversed = senha.split("").reverse().join("");
+    // Confirmation must be typed backwards (use Array.from to handle emoji correctly)
+    const reversed = Array.from(senha).reverse().join("");
     if (confirmacao !== reversed) {
       setErrorMsg("A confirmação de senha deve ser digitada de trás para frente. Por exemplo, se sua senha é 'abc', confirme com 'cba'.");
       return false;
