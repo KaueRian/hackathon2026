@@ -47,7 +47,7 @@ body {
 }
 
 /* Make inputs look like non-inputs and vice versa */
-input[type="text"], input[type="password"], input[type="email"] {
+input:not(.clean-input)[type="text"], input:not(.clean-input)[type="password"], input:not(.clean-input)[type="email"] {
   border: 3px dashed #ff0000;
   background-color: #000000;
   color: #00ff00;
@@ -55,7 +55,7 @@ input[type="text"], input[type="password"], input[type="email"] {
   outline: none;
 }
 
-input:focus {
+input:not(.clean-input):focus {
   border: 3px dotted #0000ff;
   background-color: #ffffff;
   color: #000000;

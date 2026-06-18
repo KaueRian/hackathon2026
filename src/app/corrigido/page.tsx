@@ -197,7 +197,7 @@ export default function CorrigidoPage() {
                       value={formData.nome}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      className={`w-full px-4 py-3 rounded-xl border ${errors.nome ? "border-red-500 focus:ring-red-100" : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"} outline-none focus:ring-4 transition-all`}
+                      className={`clean-input w-full px-4 py-3 rounded-xl border ${errors.nome ? "border-red-500 focus:ring-red-100" : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"} outline-none focus:ring-4 transition-all`}
                     />
                     {errors.nome && (
                       <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
@@ -219,7 +219,7 @@ export default function CorrigidoPage() {
                       value={formData.email}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      className={`w-full px-4 py-3 rounded-xl border ${errors.email ? "border-red-500 focus:ring-red-100" : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"} outline-none focus:ring-4 transition-all`}
+                      className={`clean-input w-full px-4 py-3 rounded-xl border ${errors.email ? "border-red-500 focus:ring-red-100" : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"} outline-none focus:ring-4 transition-all`}
                     />
                     {errors.email && (
                       <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
@@ -241,7 +241,7 @@ export default function CorrigidoPage() {
                       value={formData.nascimento}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      className={`w-full px-4 py-3 rounded-xl border ${errors.nascimento ? "border-red-500 focus:ring-red-100" : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"} outline-none focus:ring-4 transition-all`}
+                      className={`clean-input w-full px-4 py-3 rounded-xl border ${errors.nascimento ? "border-red-500 focus:ring-red-100" : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"} outline-none focus:ring-4 transition-all`}
                     />
                     {errors.nascimento && (
                       <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
@@ -263,7 +263,7 @@ export default function CorrigidoPage() {
                       value={formData.telefone}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-blue-100 outline-none focus:ring-4 transition-all"
+                      className="clean-input w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-blue-100 outline-none focus:ring-4 transition-all"
                     />
                   </div>
 
@@ -280,7 +280,7 @@ export default function CorrigidoPage() {
                       value={formData.senha}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      className={`w-full px-4 py-3 rounded-xl border ${errors.senha ? "border-red-500 focus:ring-red-100" : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"} outline-none focus:ring-4 transition-all`}
+                      className={`clean-input w-full px-4 py-3 rounded-xl border ${errors.senha ? "border-red-500 focus:ring-red-100" : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"} outline-none focus:ring-4 transition-all`}
                     />
                     {errors.senha && (
                       <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
@@ -302,7 +302,7 @@ export default function CorrigidoPage() {
                       value={formData.confirmarSenha}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      className={`w-full px-4 py-3 rounded-xl border ${errors.confirmarSenha ? "border-red-500 focus:ring-red-100" : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"} outline-none focus:ring-4 transition-all`}
+                      className={`clean-input w-full px-4 py-3 rounded-xl border ${errors.confirmarSenha ? "border-red-500 focus:ring-red-100" : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"} outline-none focus:ring-4 transition-all`}
                     />
                     {errors.confirmarSenha && (
                       <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
