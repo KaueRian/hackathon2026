@@ -1,16 +1,17 @@
 @import "tailwindcss";
 
-:root {
 @theme {
   --font-sans: var(--font-comic);
   --font-mono: var(--font-geist-mono);
 }
 
 :root {
-  --background: #f7ff00; /* Yellow */
-  --foreground: #ff00ea; /* Pink/Magenta */
-  --primary: #00ff08; /* Neon Green */
-  --error: #0000ff; /* Blue for error, just to confuse */
+  --background: #f7ff00;
+  --foreground: #ff00ea;
+  --primary: #00ff08;
+  --error: #0000ff;
+  --surface: rgba(0, 0, 0, 0.06);
+  --surface-dark: rgba(255, 255, 255, 0.08);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,6 +19,8 @@
     --background: #2a0000;
     --foreground: #00ffff;
     --primary: #ff5e00;
+    --surface: rgba(255, 255, 255, 0.06);
+    --surface-dark: rgba(0, 0, 0, 0.3);
   }
 }
 
@@ -28,7 +31,7 @@ body {
   cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' style='font-size: 24px'><text y='24'>🖕</text></svg>") 16 16, auto;
 }
 
-/* Horrible global animations */
+/* ===== Horrible global animations ===== */
 @keyframes slight-shake {
   0% { transform: translate(1px, 1px) rotate(0deg); }
   10% { transform: translate(-1px, -2px) rotate(-1deg); }
@@ -47,22 +50,188 @@ body {
   animation: slight-shake 0.5s infinite;
 }
 
-/* Make inputs look like non-inputs and vice versa */
-input[type="text"], input[type="password"], input[type="email"] {
+@keyframes rainbow-bg {
+  0% { background-color: #ff0000; }
+  16% { background-color: #ff8800; }
+  33% { background-color: #ffff00; }
+  50% { background-color: #00ff00; }
+  66% { background-color: #0088ff; }
+  83% { background-color: #8800ff; }
+  100% { background-color: #ff0000; }
+}
+
+@keyframes blink-text {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 5px var(--primary), 0 0 10px var(--primary); }
+  50% { box-shadow: 0 0 20px var(--primary), 0 0 40px var(--primary), 0 0 60px var(--primary); }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes progress-troll {
+  0% { width: 0%; }
+  60% { width: 99%; }
+  70% { width: 42%; }
+  85% { width: 87%; }
+  90% { width: 31%; }
+  95% { width: 99%; }
+  100% { width: 100%; }
+}
+
+/* ===== Make inputs look like non-inputs ===== */
+input[type="text"], input[type="password"], input[type="email"], input[type="tel"], input[type="date"], select, textarea {
   border: 3px dashed #ff0000;
   background-color: #000000;
   color: #00ff00;
   border-radius: 0;
   outline: none;
+  padding: 10px 14px;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-input:focus {
+input:focus, select:focus, textarea:focus {
   border: 3px dotted #0000ff;
   background-color: #ffffff;
   color: #000000;
 }
 
-/* Scrollbar invisivel/estranha */
+/* ===== Form step styles ===== */
+.form-step {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.form-title {
+  font-family: var(--font-creep, var(--font-sans));
+  font-size: 2.2rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  text-shadow: 3px 3px 0px #000, -1px -1px 0px #fff;
+}
+
+.form-subtitle {
+  text-align: center;
+  font-size: 0.9rem;
+  opacity: 0.7;
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.form-error {
+  color: var(--error);
+  font-size: 0.8rem;
+  margin-top: 0.3rem;
+  font-weight: 700;
+}
+
+.form-hint {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  margin-top: 0.2rem;
+}
+
+/* ===== Button styles ===== */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 32px;
+  background: var(--primary);
+  color: #000;
+  border: 3px solid #000;
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.btn-primary:hover {
+  animation: slight-shake 0.3s infinite;
+  box-shadow: 5px 5px 0px #000;
+}
+
+.btn-primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  animation: none;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: transparent;
+  color: var(--foreground);
+  border: 2px dashed var(--foreground);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+/* ===== Progress bar ===== */
+.progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 100;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff);
+  background-size: 300% 100%;
+  animation: rainbow-slide 2s linear infinite;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes rainbow-slide {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+/* ===== Scrollbar horrivel ===== */
 ::-webkit-scrollbar {
   width: 20px;
 }
@@ -75,4 +244,175 @@ input:focus {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #0000ff;
+}
+
+/* ===== Cookie popup ===== */
+.cookie-popup {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #000;
+  color: #0f0;
+  border-top: 5px dashed #ff0000;
+  padding: 2rem;
+  z-index: 9999;
+  font-size: 1.1rem;
+}
+
+.cookie-popup .accept-btn {
+  font-size: 6px;
+  padding: 1px 3px;
+  opacity: 0.3;
+  border: none;
+  background: #333;
+  color: #444;
+  cursor: pointer;
+}
+
+.cookie-popup .reject-btn {
+  font-size: 1.3rem;
+  padding: 12px 40px;
+  background: #ff0000;
+  color: #fff;
+  border: 3px solid #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ===== Landing styles ===== */
+.landing-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.landing-title {
+  font-family: var(--font-creep, var(--font-sans));
+  font-size: 4rem;
+  text-shadow: 4px 4px 0px #000, -2px -2px 0px #fff;
+  margin-bottom: 1rem;
+  animation: slight-shake 3s infinite;
+}
+
+.fake-btn {
+  font-size: 2.5rem;
+  padding: 24px 60px;
+  background: #ff0000;
+  color: #fff;
+  border: 5px solid #000;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  cursor: pointer;
+  animation: pulse-glow 1.5s infinite;
+  margin: 2rem 0;
+}
+
+.real-link {
+  font-size: 8px;
+  color: var(--background);
+  text-decoration: none;
+  opacity: 0.15;
+  margin-top: 3rem;
+}
+
+.real-link:hover {
+  opacity: 0.4;
+}
+
+/* ===== Parabéns page ===== */
+.congrats-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  color: #e94560;
+  position: relative;
+  overflow: hidden;
+}
+
+.congrats-title {
+  font-family: var(--font-creep, var(--font-sans));
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.congrats-message {
+  font-size: 1.3rem;
+  color: #fff;
+  max-width: 600px;
+  line-height: 1.8;
+}
+
+/* ===== Ranking table ===== */
+.ranking-table {
+  width: 100%;
+  max-width: 500px;
+  border-collapse: collapse;
+  margin: 2rem auto;
+}
+
+.ranking-table th,
+.ranking-table td {
+  padding: 10px 16px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.ranking-table th {
+  color: #e94560;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.ranking-table td {
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+.ranking-table tr:hover td {
+  background: rgba(233, 69, 96, 0.1);
+}
+
+/* ===== Fake timer ===== */
+.fake-timer {
+  font-family: var(--font-mono, monospace);
+  font-size: 1.5rem;
+  color: #ff0000;
+  animation: blink-text 1s infinite;
+  font-weight: 700;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 640px) {
+  .landing-title {
+    font-size: 2.5rem;
+  }
+  .fake-btn {
+    font-size: 1.5rem;
+    padding: 16px 32px;
+  }
+  .form-step {
+    padding: 1rem;
+  }
+  .form-title {
+    font-size: 1.6rem;
+  }
+  .congrats-title {
+    font-size: 2rem;
+  }
 }

@@ -2,11 +2,11 @@
 
 import { useState, ChangeEvent } from 'react';
 
-export function useFormState<T extends Record<string, any>>(initialState: T) {
+export function useFormState<T extends Record<string, string | boolean | number>>(initialState: T) {
   const [values, setValues] = useState<T>(initialState);
   const [errors, setErrors] = useState<Partial<Record<keyof T, string>>>({});
 
-  const handleChange = (name: keyof T, value: any) => {
+  const handleChange = (name: keyof T, value: T[keyof T]) => {
     setValues((prev) => ({ ...prev, [name]: value }));
     // Clear error when field changes
     if (errors[name]) {
@@ -16,13 +16,13 @@ export function useFormState<T extends Record<string, any>>(initialState: T) {
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
-    
-    let parsedValue = value;
+
+    let parsedValue: string | boolean = value;
     if (type === 'checkbox') {
-      parsedValue = (e.target as HTMLInputElement).checked as any;
+      parsedValue = (e.target as HTMLInputElement).checked;
     }
 
-    handleChange(name as keyof T, parsedValue);
+    handleChange(name as keyof T, parsedValue as T[keyof T]);
   };
 
   return { values, setValues, errors, setErrors, handleChange, handleInputChange };

@@ -1,21 +1,17 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useSession } from '@/lib/sessionStore';
 
 export function useTimer() {
   const { session } = useSession();
   const [elapsed, setElapsed] = useState(0);
-  const [isRunning, setIsRunning] = useState(false);
+
+  // Derive isRunning from session state instead of setting it in an effect
+  const isRunning = useMemo(() => !!session.startedAt, [session.startedAt]);
 
   useEffect(() => {
-    if (session.startedAt) {
-      setIsRunning(true);
-    }
-  }, [session.startedAt]);
-
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: ReturnType<typeof setInterval>;
     if (isRunning && session.startedAt) {
       interval = setInterval(() => {
         setElapsed(Math.floor((Date.now() - session.startedAt!) / 1000));
@@ -25,7 +21,6 @@ export function useTimer() {
   }, [isRunning, session.startedAt]);
 
   const stopTimer = () => {
-    setIsRunning(false);
     return elapsed;
   };
 
