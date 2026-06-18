@@ -238,9 +238,9 @@
 
 ## Fase 13 — Deploy
 
-- [ ] Conectar repositório GitHub ao Cloudflare Pages (ou Vercel como fallback)
-- [ ] Configurar variáveis de ambiente no serviço de deploy
-- [ ] Build command: `npx next build`
+- [x] Conectar repositório GitHub ao Cloudflare Pages (ou Vercel como fallback)
+- [x] Configurar variáveis de ambiente no serviço de deploy
+- [x] Build command: `npx next build`
 - [ ] Verificar URL pública funcionando
 - [ ] Gerar QR Code para o link público
 - [ ] Testar acesso via QR Code no celular
@@ -249,14 +249,14 @@
 
 ## Fase 14 — Testes & Verificação Final
 
-- [ ] `npm run build` compila sem erros
-- [ ] Fluxo completo funcional: Landing → Dados → Senha → Preferências → Confirmação → Parabéns
-- [ ] Todos os anti-patterns funcionando corretamente em cada tela
-- [ ] Ranking salvando e exibindo tempos
-- [ ] Versão corrigida (`/corrigido`) funcionando
+- [x] `npm run build` compila sem erros
+- [x] Fluxo completo funcional: Landing → Dados → Senha → Preferências → Confirmação → Parabéns
+- [x] Todos os anti-patterns funcionando corretamente em cada tela
+- [x] Ranking salvando e exibindo tempos
+- [x] Versão corrigida (`/corrigido`) funcionando
 - [ ] Responsivo em mobile (dinâmica do evento usa QR Code)
 - [ ] Testar com colegas e coletar feedback
-- [ ] Commit final e push para `main` antes de 19/06 23h59
+- [x] Commit final e push para `main` antes de 19/06 23h59
 
 ---
 
