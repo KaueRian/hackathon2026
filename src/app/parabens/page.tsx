@@ -34,12 +34,17 @@ export default function ParabensPage() {
     if (!nickname.trim()) return;
     setSaving(true);
 
-    const elapsedSeconds = Math.floor(elapsed / 1000);
+    // elapsed from useTimer is already in SECONDS — do NOT divide by 1000 again
+    const elapsedSeconds = elapsed;
 
-    await supabase.from("sessions").insert({
+    const { error } = await supabase.from("sessions").insert({
       nickname: nickname.trim(),
       elapsed_seconds: elapsedSeconds,
     });
+
+    if (error) {
+      console.error("Erro ao salvar no ranking:", error.message);
+    }
 
     setSaved(true);
     setSaving(false);
