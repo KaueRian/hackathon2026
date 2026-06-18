@@ -25,8 +25,19 @@ const creepster = Creepster({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://fases.hackathon2026.pages.dev"),
   title: "FormHell - O Cadastro Impossível",
-  description: "A pior experiência de usuário que você já teve.",
+  description: "A pior experiência de usuário que você já teve. Você consegue criar uma conta?",
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
+  openGraph: {
+    title: "FormHell - O Cadastro Impossível",
+    description: "A pior experiência de usuário que você já teve. Você consegue criar uma conta?",
+    images: ["/logo.png"],
+  },
 };
 
 import { SessionProvider } from "@/lib/sessionStore";
