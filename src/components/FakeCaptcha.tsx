@@ -24,12 +24,12 @@ export function FakeCaptcha({ onVerify }: { onVerify: (success: boolean) => void
   const [selected, setSelected] = useState<number[]>([]);
   const [images, setImages] = useState<string[]>(() => randomGrid());
   const [instruction, setInstruction] = useState(INSTRUCTIONS[0]);
+  const [attempts, setAttempts] = useState(0);
 
   const handleSelect = useCallback((index: number) => {
     setSelected((prev) =>
       prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
     );
-    // Randomly change image on click
     setImages((prev) => {
       if (Math.random() > 0.5) {
         const next = [...prev];
@@ -41,16 +41,20 @@ export function FakeCaptcha({ onVerify }: { onVerify: (success: boolean) => void
   }, []);
 
   const handleVerify = useCallback(() => {
-    if (Math.random() > 0.3) {
+    const newAttempts = attempts + 1;
+    setAttempts(newAttempts);
+
+    // After 3 failed attempts, pass automatically so demo never gets stuck
+    if (newAttempts >= 3 || Math.random() > 0.7) {
+      onVerify(true);
+    } else {
       alert("Tente novamente. Novos desafios foram carregados.");
       setSelected([]);
       setImages(randomGrid());
       setInstruction(randomInstruction());
       onVerify(false);
-    } else {
-      onVerify(true);
     }
-  }, [onVerify]);
+  }, [onVerify, attempts]);
 
   return (
     <div className="bg-white p-4 border border-gray-300 shadow-xl max-w-sm w-full mx-auto font-sans text-black">

@@ -86,7 +86,7 @@ Escolha qualquer pergunta e escreva qualquer resposta. Ex: `Bolinha`
 > Aqui está o desafio final antes de terminar!
 
 - O **resumo dos seus dados** vai aparecer trocado — ignore, é de propósito.
-- O **CAPTCHA** mostra uma conta de matemática mas pede "as letras da imagem". Digite qualquer coisa, vai dar erro de qualquer forma. Tente mais uma vez que eventualmente aceita.
+- O **CAPTCHA** mostra uma conta de matemática mas pede "as letras da imagem". Clique em qualquer quadrado colorido e tente verificar. **Na 3ª tentativa ele passa automaticamente** (pode tentar logo de cara, mas vá clicando).
 - O botão **"Confirmar Cadastro" foge do mouse** — mova o mouse devagar e tente encurralar o botão no canto da tela.
 - Vai aparecer um pop-up **"Tem certeza?"** com os botões trocados:
   - Clique em **"Cancelar"** para confirmar de verdade.
