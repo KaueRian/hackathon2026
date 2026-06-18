@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react"; // useRef kept for bottomRef div
 import { useRouter } from "next/navigation";
 import { useSession } from "@/lib/sessionStore";
 import { ProgressBarTroll } from "@/components/ProgressBarTroll";
@@ -162,7 +162,7 @@ export default function DadosPessoaisPage() {
               onChange={(e) => setNomeInput(e.target.value)}
             />
             {nomeInput.length > 3 && !nomeInput.includes("$@") && !nomeInput.includes("@$") && (
-              <p className="text-red-600 text-xs mt-1">Formato inválido. E-mails válidos devem conter o símbolo especial obrigatório "$".</p>
+              <p className="text-red-600 text-xs mt-1">Formato inválido. E-mails válidos devem conter o símbolo especial obrigatório &quot;$&quot;.</p>
             )}
           </div>
 
@@ -204,7 +204,7 @@ export default function DadosPessoaisPage() {
             <label className="block text-xl font-bold mb-1 text-black">
               Telefone (opcional, mas obrigatório)
             </label>
-            <p className="text-xs text-gray-400 mb-2">Digite os números por extenso, separados por espaço (ex: "seis nove nove meia meia...")</p>
+            <p className="text-xs text-gray-400 mb-2">Digite os números por extenso, separados por espaço (ex: &quot;seis nove nove meia meia...&quot;)</p>
             <input
               type="text"
               autoComplete="off"
@@ -224,7 +224,7 @@ export default function DadosPessoaisPage() {
           {/* Spacer to force scrolling */}
           <div className="h-48 bg-yellow-100 flex items-center justify-center border-4 border-dashed border-gray-400">
             <p className="text-gray-500 text-sm text-center">
-              ⬇ Role até o final da página para desbloquear o botão "Próximo" ⬇
+              ⬇ Role até o final da página para desbloquear o botão &quot;Próximo&quot; ⬇
               <br/>
               <span className="text-xs opacity-50">(Não indicaremos quando você chegar lá)</span>
             </p>

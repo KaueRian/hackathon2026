@@ -59,7 +59,7 @@ export default function SenhaPage() {
   const [pergunta, setPergunta] = useState(SECURITY_QUESTIONS[0]);
   const [resposta, setResposta] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-  const [inactivityTimer, setInactivityTimer] = useState<NodeJS.Timeout | null>(null);
+  const inactivityTimer = useRef<NodeJS.Timeout | null>(null);
 
   // Requirements revealed progressively
   const requirements = [
@@ -76,18 +76,17 @@ export default function SenhaPage() {
 
   // Inactivity timer that clears password field
   const resetInactivityTimer = () => {
-    if (inactivityTimer) clearTimeout(inactivityTimer);
+    if (inactivityTimer.current) clearTimeout(inactivityTimer.current);
     const t = setTimeout(() => {
       setSenha("");
       setErrorMsg("Por inatividade de 10 segundos, o campo de senha foi limpo por segurança. Recomeçe!");
     }, 10000);
-    setInactivityTimer(t);
+    inactivityTimer.current = t;
   };
 
   useEffect(() => {
     resetInactivityTimer();
-    return () => { if (inactivityTimer) clearTimeout(inactivityTimer); };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => { if (inactivityTimer.current) clearTimeout(inactivityTimer.current); };
   }, [senha]);
 
   // Password field moves every 15 seconds

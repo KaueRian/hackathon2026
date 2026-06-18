@@ -1,20 +1,22 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
+
+type Particle = { id: number; left: number; delay: number; duration: number };
+
+// Generate particles once at module level so they're stable across renders
+function generateParticles(): Particle[] {
+  return Array.from({ length: 50 }, (_, i) => ({
+    id: i,
+    left: Math.random() * 100,
+    delay: Math.random() * 5,
+    duration: 3 + Math.random() * 4,
+  }));
+}
 
 export function Confetti() {
-  const [particles, setParticles] = useState<{ id: number; left: number; delay: number; duration: number }[]>([]);
-
-  useEffect(() => {
-    // Generate 50 error icons
-    const newParticles = Array.from({ length: 50 }).map((_, i) => ({
-      id: i,
-      left: Math.random() * 100, // random left percentage
-      delay: Math.random() * 5, // random delay
-      duration: 3 + Math.random() * 4, // random fall duration
-    }));
-    setParticles(newParticles);
-  }, []);
+  // useMemo with no deps = stable across re-renders, no state needed
+  const particles = useMemo(() => generateParticles(), []);
 
   return (
     <div className="fixed inset-0 pointer-events-none z-[100] overflow-hidden">

@@ -15,7 +15,7 @@ export function CookiePopup() {
       </h1>
       
       <p className="text-xl mb-12 text-black max-w-3xl text-justify font-sans leading-relaxed">
-        Ao clicar em "Aceitar", você concorda em nos vender sua alma, sua casa, e permitir que usemos todos os seus dados para treinar modelos de linguagem que vão eventualmente dominar o mundo. Se você tentar recusar, as coisas vão ficar muito complicadas. Além disso, nós usamos cookies para garantir que você não tenha privacidade.
+        Ao clicar em &quot;Aceitar&quot;, você concorda em nos vender sua alma, sua casa, e permitir que usemos todos os seus dados para treinar modelos de linguagem que vão eventualmente dominar o mundo. Se você tentar recusar, as coisas vão ficar muito complicadas. Além disso, nós usamos cookies para garantir que você não tenha privacidade.
       </p>
 
       <div className="flex gap-8 items-center w-full justify-center">

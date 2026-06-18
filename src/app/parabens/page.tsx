@@ -9,16 +9,12 @@ import { useTimer } from "@/hooks/useTimer";
 
 export default function ParabensPage() {
   const router = useRouter();
-  const { session, saveStepData, clearSession } = useSession();
+  const { clearSession } = useSession();
   const { formattedTime, elapsed } = useTimer();
   const [nickname, setNickname] = useState("");
   const [saved, setSaved] = useState(false);
   const [ranking, setRanking] = useState<{ nickname: string; elapsed_seconds: number }[]>([]);
   const [saving, setSaving] = useState(false);
-
-  useEffect(() => {
-    fetchRanking();
-  }, []);
 
   const fetchRanking = async () => {
     const { data } = await supabase
@@ -28,6 +24,11 @@ export default function ParabensPage() {
       .limit(10);
     if (data) setRanking(data);
   };
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchRanking();
+  }, []);
 
   const handleSave = async () => {
     if (!nickname.trim()) return;

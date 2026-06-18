@@ -16,7 +16,7 @@ export function CrazyPassword({
     if (!showEmojis) return "•".repeat(value.length);
     
     const emojis = ["🙈", "💩", "🦄", "🤡", "💀", "👻", "🌶️", "🍆", "🐸"];
-    return value.split("").map((char, i) => {
+    return value.split("").map((char) => {
       // Usa o código do caractere para pegar um emoji "consistente" mas inútil
       return emojis[char.charCodeAt(0) % emojis.length];
     }).join("");

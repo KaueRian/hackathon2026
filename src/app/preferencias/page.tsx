@@ -176,7 +176,7 @@ export default function PreferenciasPage() {
                 Absolutamente Sim
               </button>
             </div>
-            <p className="text-xs text-gray-400 mt-2">* Não há opção de "Não" neste formulário.</p>
+            <p className="text-xs text-gray-400 mt-2">* Não há opção de &quot;Não&quot; neste formulário.</p>
           </div>
 
           {/* Lorem ipsum terms that uncheck on click */}

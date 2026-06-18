@@ -4,7 +4,6 @@ import Link from "next/link";
 import { CookiePopup } from "@/components/CookiePopup";
 import { FakeTimer } from "@/components/FakeTimer";
 import { useSession } from "@/lib/sessionStore";
-import { useEffect } from "react";
 import { RunawayButton } from "@/components/RunawayButton";
 
 export default function LandingPage() {

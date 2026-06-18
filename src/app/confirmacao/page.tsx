@@ -163,7 +163,7 @@ export default function ConfirmacaoPage() {
                 </button>
               </div>
               <p className="text-xs text-gray-400 mt-3 text-center">
-                * "OK" não confirma. "Cancelar" confirma. Sim, de propósito.
+              * &quot;OK&quot; não confirma. &quot;Cancelar&quot; confirma. Sim, de propósito.
               </p>
             </div>
           </div>
