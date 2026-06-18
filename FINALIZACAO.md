@@ -1,131 +1,118 @@
-# ✅ Checklist de Finalização — FormHell
+# 😈 Guia de Sobrevivência — FormHell
 
-> Guia prático para finalizar e apresentar o projeto no Hackathon IFRO 2026.
-
----
-
-## 1. 🔑 Configurar Variáveis no Cloudflare Pages
-
-No painel da Cloudflare Pages, antes de validar a URL:
-
-1. Acesse [dash.cloudflare.com](https://dash.cloudflare.com) → **Workers & Pages**
-2. Clique no projeto `hackathon2026`
-3. Vá em **Settings → Environment variables**
-4. Clique em **Add variable** e adicione as duas abaixo:
-
-| Nome da variável              | Valor                          |
-| :---------------------------- | :----------------------------- |
-| `NEXT_PUBLIC_SUPABASE_URL`    | (valor do seu `.env.local`)    |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | (valor do seu `.env.local`) |
-
-5. Clique em **Save**
-6. Vá em **Deployments → Retry deployment** (ou faça um push qualquer para disparar novo build)
-
-> ⚠️ Sem essas variáveis, o Ranking e o salvamento de sessão não vão funcionar em produção.
+> Como criar sua conta e sobreviver ao pior formulário do mundo.
 
 ---
 
-## 2. 🌐 Validar a URL Pública
+## Tela 0 — Landing Page
 
-Acesse cada rota e confirme que está funcionando:
+1. **Ignore** o botão gigante **"NÃO, OBRIGADO"** — ele não faz nada.
+2. Procure o texto minúsculo no canto inferior da tela (quase invisível): **"clique aqui"**.
+3. Clique nele para começar. O cronômetro inicia agora!
 
-| Rota            | O que verificar                                              |
-| :-------------- | :----------------------------------------------------------- |
-| `/`             | Landing page com timer falso, cookie popup e link escondido  |
-| `/dados-pessoais` | Campos com labels trocadas e validações absurdas           |
-| `/senha`        | Requisitos de senha revelados um a um, campo mudando de lugar |
-| `/preferencias` | Toggle invertido, carrossel impossível, termos em lorem ipsum |
-| `/confirmacao`  | Botão que foge, captcha falso, barra de loading troll        |
-| `/parabens`     | Timer final exibido, campo de nickname, salvamento no Supabase |
-| `/ranking`      | Tabela com tempos, atualização automática a cada 10s         |
-| `/corrigido`    | Formulário limpo com boa UX, campos brancos normais          |
+> ⚠️ Feche o pop-up de cookies clicando no botão de aceitar — mas cuidado, ele foge do mouse!
 
 ---
 
-## 3. 📲 Gerar o QR Code
+## Tela 1 — Dados Pessoais
 
-Com a URL pública em mãos (ex: `https://fases.hackathon2026.pages.dev`):
+> Os campos estão com as **labels trocadas de propósito**. Faça o contrário do que parece!
 
-1. Acesse [qr.io](https://qr.io) ou [goqr.me](https://goqr.me)
-2. Cole a URL da Landing Page (`/`)
-3. Gere e baixe o QR Code em alta resolução (PNG)
-4. Gere um **segundo QR Code** para o Ranking (`/ranking`) — útil para projetar na TV durante a apresentação
+| Campo exibido na tela | O que você deve digitar |
+| :--- | :--- |
+| **"E-mail \*"** (1º campo) | Seu **nome**, sem espaços. Ex: `JoaoSilva` |
+| **"Nome Completo \*"** (2º campo) | Seu **e-mail** — mas com `$` junto do `@`. Ex: `joao$@gmail.com` |
+| **"Data de Nascimento \*"** | Data no formato `AAAA/DD/MM`. Ex: `2000/15/03` |
+| **"Identidade de Gênero \*"** | Escolha qualquer opção do dropdown |
+| **"Telefone"** | Números **por extenso**. Ex: `nove nove meia dois...` (opcional) |
 
----
-
-## 4. 🧪 Teste com Colegas
-
-Antes da apresentação, peça para pelo menos 2-3 pessoas testarem o fluxo completo:
-
-- [ ] Acessar via QR Code no celular
-- [ ] Completar o formulário do início ao fim
-- [ ] Confirmar que o tempo aparece no `/ranking`
-- [ ] Verificar que o `/corrigido` está com visual limpo e correto
-
-Anote os feedbacks e o tempo médio para usar no pitch e no README.
+4. **Role a página até o final** — o botão "Próximo" só aparece após você rolar tudo.
+5. Clique em **"PRÓXIMO →"**.
 
 ---
 
-## 5. 📝 Atualizar o README com dados reais
+## Tela 2 — Senha & Segurança
 
-Abra o `README.md` e preencha os placeholders:
+> A senha tem regras absurdas reveladas uma a uma conforme você digita. Use o exemplo abaixo!
 
-- **Seção 3 — Link do MVP:** substituir `[INSERIR URL DO DEPLOY AQUI]` pela URL real
-- **Seção 4 — Pitch:** substituir `[INSERIR LINK DOS SLIDES AQUI]` pelo link do Google Slides / Canva
-- **Seção 8 — Validação:** preencher tempo médio e feedbacks reais dos colegas
+### ✅ Exemplo de senha que passa em todos os requisitos:
 
-Depois commit:
-```bash
-git add README.md
-git commit -m "Docs: Update README with live URL and test results"
-git push origin fases
+```
+IV🔥Az9mxqp2
 ```
 
----
+**Por quê essa senha funciona?**
+- ✅ Tem 12+ caracteres
+- ✅ Contém o emoji `🔥`
+- ✅ Contém numeral romano: `IV`
+- ✅ Não tem letras consecutivas no alfabeto (`m` e `x` não são consecutivas)
+- ✅ Tem exatamente 2 letras maiúsculas: `A` e `z`... (ajuste se precisar: `Az`)
+- ✅ Soma dos dígitos: `9 + 2 = 11` (número primo ✓)
 
-## 6. 🎤 Preparar para a Apresentação (até 26/06)
+> ⚠️ Não fique parado por mais de **10 segundos** — o campo apaga sozinho!
 
-### Roteiro sugerido (5-7 minutos):
+### Campo "Confirme a Senha":
 
-1. **Contexto (1 min):** Por que UX importa? Qual o custo de um formulário ruim?
-2. **Demo ao vivo (3 min):** Abrir no celular via QR Code, mostrar as armadilhas ao vivo enquanto alguém tenta completar.
-3. **Análise técnica (1 min):** Mostrar brevemente o `/corrigido` e a tabela de heurísticas de Nielsen violadas no README.
-4. **Ranking (30s):** Exibir o `/ranking` na tela — mostra gamificação e integração com backend real.
-5. **Conclusão (30s):** O que aprendemos, tecnologias usadas (Next.js 15, Supabase, Cloudflare Pages).
+Digite a senha **de trás para frente**.
 
-### Dicas:
-- Projete o `/ranking` em looping enquanto a plateia testa via QR Code.
-- Deixe o link e o QR Code visíveis nos slides desde o início.
-- Prepare resposta para: *"Por que vocês escolheram violar essas heurísticas específicas?"*
+Exemplo: se sua senha é `IV🔥Az9mxqp2`, confirme com `2pqxm9zA🔥VI`
 
----
+### Pergunta de Segurança:
 
-## 7. 🚀 Stack e Comandos Úteis
+Escolha qualquer pergunta e escreva qualquer resposta. Ex: `Bolinha`
 
-```bash
-# Rodar localmente
-npm run dev
-
-# Checar lint
-npm run lint
-
-# Build de produção local
-npm run build
-
-# Subir para a branch fases (Cloudflare faz deploy automático)
-git add .
-git commit -m "sua mensagem"
-git push origin fases
-```
-
-**Stack usada:**
-- **Framework:** Next.js 15 (App Router)
-- **Linguagem:** TypeScript
-- **Estilo:** Tailwind CSS 4 + Vanilla CSS
-- **Backend/DB:** Supabase (PostgreSQL)
-- **Deploy:** Cloudflare Pages (CI/CD via GitHub)
-- **Testes:** Jest (TDD para validações de senha)
+6. Clique em **"PRÓXIMO →"**.
 
 ---
 
-> 💡 **Boa apresentação!** Lembrem que o objetivo não é só fazer rir — é demonstrar que vocês entendem profundamente o que torna uma interface boa ou ruim. Isso impressiona qualquer banca!
+## Tela 3 — Preferências
+
+> Tudo aqui funciona ao contrário. Não tente entender, só clique em qualquer coisa.
+
+- **Sliders de cores:** arraste para qualquer posição.
+- **Toggle "Ativar notificações":** o verde significa desligado — deixe como quiser.
+- **"Selecionar Todos":** seleciona nada. Clique duas vezes pra ver o efeito.
+- **Termos de uso:** o checkbox começa marcado. **Não clique nele** (clicar desmarca).
+- **Estrelas:** 1★ é o melhor, 5★ é o pior. Escolha 1★ se quiser dizer que amou.
+- **Carrossel de avatar:** gira rápido, tente clicar no avatar que aparecer.
+- **"Você concorda?"** Clique em **"Sim"** ou **"Absolutamente Sim"** — tanto faz.
+
+7. Clique em **"PRÓXIMO →"**.
+
+---
+
+## Tela 4 — Confirmação & CAPTCHA
+
+> Aqui está o desafio final antes de terminar!
+
+- O **resumo dos seus dados** vai aparecer trocado — ignore, é de propósito.
+- O **CAPTCHA** mostra uma conta de matemática mas pede "as letras da imagem". Digite qualquer coisa, vai dar erro de qualquer forma. Tente mais uma vez que eventualmente aceita.
+- O botão **"Confirmar Cadastro" foge do mouse** — mova o mouse devagar e tente encurralar o botão no canto da tela.
+- Vai aparecer um pop-up **"Tem certeza?"** com os botões trocados:
+  - Clique em **"Cancelar"** para confirmar de verdade.
+  - (Clicar em "OK" cancela tudo!)
+- Aguarde a barra de carregamento (vai até 99% e voltar — é normal, espere até o final).
+
+8. Após o loading, você será redirecionado para a tela final!
+
+---
+
+## Tela 5 — Parabéns! 🎉
+
+Você sobreviveu ao FormHell!
+
+- Digite seu **apelido** (nickname) para entrar no ranking.
+- Clique em **"Salvar no Ranking"**.
+- Veja quanto tempo você demorou e compare com os outros no ranking!
+
+---
+
+## 🏆 Ranking público
+
+Acesse em qualquer momento para ver o placar:
+
+👉 **[URL DO SITE]/ranking**
+
+---
+
+> 💡 Quanto **mais tempo** você demorou, **pior** você foi. O objetivo é terminar o mais rápido possível!
