@@ -28,6 +28,7 @@ export default function RankingPage() {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchRanking();
     
     // Auto refresh every 10 seconds (useful for presentation)

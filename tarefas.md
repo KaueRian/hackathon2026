@@ -225,14 +225,14 @@
 
 ## Fase 12 — README Completo (conforme Anexo II do Edital)
 
-- [ ] Preencher seção **Problema** (contexto pedagógico)
-- [ ] Preencher seção **Solução** (descrição do FormHell e fluxo)
-- [ ] Confirmar **Link do MVP** (URL de deploy)
-- [ ] Preencher seção **Pitch** (link dos slides)
-- [ ] Preencher seção **Uso de IA** (declaração das ferramentas usadas)
-- [ ] Preencher seção **Princípios de UX/UI Violados** (tabela completa das 10 heurísticas de Nielsen + outros)
-- [ ] Preencher seção **Proposta de Melhoria** (link para `/corrigido`)
-- [ ] Preencher seção **Validação** (testes com colegas, tempo médio, feedbacks)
+- [x] Preencher seção **Problema** (contexto pedagógico)
+- [x] Preencher seção **Solução** (descrição do FormHell e fluxo)
+- [x] Confirmar **Link do MVP** (URL de deploy)
+- [x] Preencher seção **Pitch** (link dos slides)
+- [x] Preencher seção **Uso de IA** (declaração das ferramentas usadas)
+- [x] Preencher seção **Princípios de UX/UI Violados** (tabela completa das 10 heurísticas de Nielsen + outros)
+- [x] Preencher seção **Proposta de Melhoria** (link para `/corrigido`)
+- [x] Preencher seção **Validação** (testes com colegas, tempo médio, feedbacks)
 
 ---
 
