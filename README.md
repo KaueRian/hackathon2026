@@ -1,54 +1,36 @@
-# FormHell — A Pior Experiência de Usuário
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Equipe
-- Nome da equipe: InterfaceGap
-- Integrantes: Gabriel de Oliveira Silva e Kauê Rian Silva Conceição Oliveira
-- Curso/Turma: Tecnologia em ADS / 5º Período
-- Categoria: Desafio Pior Experiência de Usuário
+## Getting Started
 
-## Problema
-[Explicar o contexto pedagógico: demonstrar erros comuns de UX/UI...]
+First, run the development server:
 
-## Solução
-[Descrever o FormHell, o fluxo de 5 telas, os anti-patterns...]
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-## Link do MVP
-https://formhell.pages.dev
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Vídeo de pitch
-(Não obrigatório para esta categoria, conforme Edital)
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## Pitch
-[Link dos slides da apresentação]
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Como testar
-1. Acesse https://formhell.pages.dev
-2. Tente completar o cadastro do início ao fim
-3. O objetivo é chegar à tela "Parabéns"
-4. Dica: nem tudo é o que parece 😈
+## Learn More
 
-## Tecnologias utilizadas
-- Next.js 15 (App Router)
-- React 19
-- TypeScript
-- Tailwind CSS 4
-- Supabase (PostgreSQL + Realtime)
-- Cloudflare Pages
-- Framer Motion
+To learn more about Next.js, take a look at the following resources:
 
-## Uso de IA
-[Declarar ferramentas usadas: Gemini, Copilot, etc.]
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-## Princípios de UX/UI Violados
-[Tabela completa das 10 heurísticas de Nielsen + outros princípios]
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Proposta de Melhoria
-[Link para /corrigido — versão do fluxo com UX correta]
+## Deploy on Vercel
 
-## Validação
-[Testes com colegas, tempo médio de conclusão, feedbacks]
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-## Testes e validação
-
-## Licença
-MIT License
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
