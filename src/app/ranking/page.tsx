@@ -43,10 +43,10 @@ export default function RankingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white font-sans p-8">
+    <div className="min-h-screen bg-black text-white font-sans p-4 sm:p-8">
       <div className="max-w-4xl mx-auto">
-        <div className="flex justify-between items-center mb-12 border-b-4 border-[#00ff08] pb-6">
-          <h1 className="text-5xl font-black text-[#00ff08] uppercase tracking-widest drop-shadow-[0_0_10px_#00ff08]">
+        <div className="flex flex-col sm:flex-row justify-between items-center mb-8 sm:mb-12 border-b-4 border-[#00ff08] pb-6 gap-6">
+          <h1 className="text-4xl sm:text-6xl font-black text-[#00ff08] uppercase tracking-widest drop-shadow-[0_0_10px_#00ff08]">
             Leaderboard Oficial
           </h1>
           <Link 
@@ -69,11 +69,11 @@ export default function RankingPage() {
         ) : (
           <div className="bg-gray-900 border-4 border-[#00ff08] overflow-hidden shadow-[0_0_30px_rgba(0,255,8,0.2)]">
             <table className="w-full text-left">
-              <thead className="bg-[#00ff08] text-black text-xl">
+              <thead className="bg-[#00ff08] text-black text-lg sm:text-xl">
                 <tr>
-                  <th className="py-4 px-6 font-black uppercase">Rank</th>
-                  <th className="py-4 px-6 font-black uppercase">Sobrevivente</th>
-                  <th className="py-4 px-6 font-black uppercase text-right">Tempo de Sofrimento</th>
+                  <th className="py-4 px-4 sm:px-6 font-black uppercase">Rank</th>
+                  <th className="py-4 px-4 sm:px-6 font-black uppercase">Sobrevivente</th>
+                  <th className="py-4 px-4 sm:px-6 font-black uppercase text-right">Tempo de Sofrimento</th>
                 </tr>
               </thead>
               <tbody>

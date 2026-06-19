@@ -57,9 +57,10 @@ export function FakeCaptcha({ onVerify }: { onVerify: (success: boolean) => void
   }, [onVerify, attempts]);
 
   return (
-    <div className="bg-white p-4 border border-gray-300 shadow-xl max-w-sm w-full mx-auto font-sans text-black">
-      <div className="bg-blue-600 text-white p-4 mb-4 font-bold text-lg">
-        {instruction}
+    <div className="bg-white p-3 sm:p-4 border border-gray-300 shadow-xl max-w-sm w-full mx-auto font-sans text-black">
+      <div className="bg-blue-600 text-white p-3 sm:p-4 mb-4">
+        <p className="text-sm">Selecione todas as imagens com</p>
+        <p className="text-xl sm:text-2xl font-bold">{instruction}</p>
       </div>
 
       <div className="grid grid-cols-3 gap-1 mb-4">

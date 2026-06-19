@@ -53,14 +53,14 @@ export default function ConfirmacaoPage() {
   return (
     <main className="min-h-screen bg-[var(--background)] p-8 font-sans">
       <div className="max-w-2xl mx-auto">
-        <h1 className="text-5xl font-black text-center mb-2 text-[#ff0000] drop-shadow-[3px_3px_0_#00ff00] uppercase tracking-tight">
+        <h1 className="text-3xl sm:text-5xl font-black text-center mb-2 text-red-600 drop-shadow-[3px_3px_0_#000] uppercase tracking-tight">
           Confirmação Final
         </h1>
         <p className="text-center text-sm text-black mb-8 opacity-60">
           Passo 4 de 5 — Só mais um segundo (mentira)
         </p>
 
-        <div className="flex flex-col gap-8 border-8 border-black bg-white p-8">
+        <div className="mt-6 sm:mt-10 flex flex-col gap-6 sm:gap-10 border-4 sm:border-8 border-black bg-white p-4 sm:p-8 text-black">
 
           {/* Summary with wrong data */}
           <div>
@@ -143,8 +143,8 @@ export default function ConfirmacaoPage() {
         {/* Confirm dialog with inverted buttons */}
         {showConfirmDialog && (
           <div className="fixed inset-0 bg-black bg-opacity-80 z-[999] flex items-center justify-center">
-            <div className="bg-white p-8 border-8 border-red-500 max-w-md w-full mx-4">
-              <h2 className="text-3xl font-black mb-4 text-black">Tem certeza?</h2>
+            <div className="bg-white p-4 sm:p-8 border-4 sm:border-8 border-red-500 max-w-md w-full mx-4">
+              <h2 className="text-xl sm:text-3xl font-black text-red-600 mb-4 uppercase">Tem certeza?</h2>
               <p className="mb-6 text-black">Esta ação é irreversível, permanente, final, definitiva, sem volta, e algumas outras coisas igualmente assustadoras.</p>
               <div className="flex gap-4 justify-end">
                 {/* OK = cancels */}

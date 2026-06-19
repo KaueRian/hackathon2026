@@ -63,7 +63,7 @@ export default function ParabensPage() {
 
       <div className="max-w-2xl mx-auto relative z-10">
         <div className="border-8 border-[#00ff08] bg-black text-white p-10 text-center mb-8">
-          <h1 className="text-6xl font-black mb-4 text-[#00ff08] drop-shadow-[5px_5px_0_#ff0000] animate-bounce uppercase">
+          <h1 className="text-4xl sm:text-7xl font-black text-center mb-6 text-white drop-shadow-[5px_5px_0_#ff00ea] uppercase tracking-tighter mix-blend-difference">
             🎉 PARABÉNS! 🎉
           </h1>
           <p className="text-2xl mb-6 text-yellow-300">
@@ -76,7 +76,7 @@ export default function ParabensPage() {
 
         {/* Save to ranking */}
         {!saved ? (
-          <div className="bg-white border-8 border-black p-8 mb-8">
+          <div className="bg-white border-4 sm:border-8 border-black p-4 sm:p-12 transform rotate-2 shadow-[20px_20px_0_#00ff08]">
             <h2 className="text-2xl font-black mb-4 text-black">Entre para o Ranking!</h2>
             <p className="text-sm text-gray-500 mb-4">
               Escolha um nickname para imortalizarmos sua conquista (e sua dor):

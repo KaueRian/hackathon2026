@@ -46,14 +46,14 @@ export default function PreferenciasPage() {
   return (
     <main className="min-h-screen bg-[var(--background)] p-8 font-sans">
       <div className="max-w-2xl mx-auto">
-        <h1 className="text-5xl font-black text-center mb-2 text-[#ff6600] drop-shadow-[3px_3px_0_#0000ff] uppercase tracking-tight">
+        <h1 className="text-3xl sm:text-5xl font-black text-center mb-2 text-[#00ff08] drop-shadow-[3px_3px_0_#ff00ea] uppercase tracking-tight">
           Suas Preferências
         </h1>
         <p className="text-center text-sm text-black mb-8 opacity-60">
           Passo 3 de 5 — Nos conte mais sobre você (vamos ignorar de qualquer forma)
         </p>
 
-        <div className="flex flex-col gap-10 border-8 border-black bg-white p-8">
+        <div className="mt-6 sm:mt-10 flex flex-col gap-6 sm:gap-10 border-4 sm:border-8 border-black bg-white p-4 sm:p-8">
 
           {/* Color sliders (instead of checkboxes) */}
           <div>

@@ -132,14 +132,14 @@ export default function SenhaPage() {
   return (
     <main className="min-h-screen bg-[var(--background)] p-8 font-sans">
       <div className="max-w-2xl mx-auto">
-        <h1 className="text-5xl font-black text-center mb-2 text-[#0000ff] drop-shadow-[3px_3px_0_#ff0000] uppercase tracking-tight">
+        <h1 className="text-3xl sm:text-5xl font-black text-center mb-2 text-black drop-shadow-[2px_2px_0_#ff00ea] uppercase tracking-tight">
           Senha & Segurança
         </h1>
         <p className="text-center text-sm text-black mb-8 opacity-60">
           Passo 2 de 5 — Crie uma senha que você nunca vai lembrar
         </p>
 
-        <div className="flex flex-col gap-10 border-8 border-black bg-white p-8">
+        <div className="mt-10 flex flex-col gap-6 sm:gap-10 border-4 sm:border-8 border-black bg-white p-4 sm:p-8 relative overflow-hidden">
 
           {/* Moving password field */}
           <div
