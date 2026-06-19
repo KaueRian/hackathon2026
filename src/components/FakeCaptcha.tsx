@@ -9,58 +9,69 @@ const COLORS = [
 ];
 
 const INSTRUCTIONS = [
-  "Selecione todos os semáforos",
-  "Selecione as faixas de pedestre",
-  "Clique nas montanhas ou colinas",
-  "Ache o hidrante invisível",
-  "Selecione os quadrados que não têm nada",
+  "as cores de um semáforo",
 ];
 
 function randomColor() { return COLORS[Math.floor(Math.random() * COLORS.length)]; }
-function randomInstruction() { return INSTRUCTIONS[Math.floor(Math.random() * INSTRUCTIONS.length)]; }
-function randomGrid() { return Array.from({ length: 9 }, () => randomColor()); }
+
+function randomGrid() { 
+  const grid = Array.from({ length: 9 }, () => randomColor()); 
+  // Garantir que as três cores do semáforo existam no grid
+  grid[0] = "bg-red-500";
+  grid[1] = "bg-yellow-500";
+  grid[2] = "bg-green-500";
+  // Embaralhar
+  return grid.sort(() => Math.random() - 0.5);
+}
 
 export function FakeCaptcha({ onVerify }: { onVerify: (success: boolean) => void }) {
   const [selected, setSelected] = useState<number[]>([]);
   const [images, setImages] = useState<string[]>(() => randomGrid());
-  const [instruction, setInstruction] = useState(INSTRUCTIONS[0]);
   const [attempts, setAttempts] = useState(0);
 
   const handleSelect = useCallback((index: number) => {
     setSelected((prev) =>
       prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
     );
-    setImages((prev) => {
-      if (Math.random() > 0.5) {
-        const next = [...prev];
-        next[index] = randomColor();
-        return next;
-      }
-      return prev;
-    });
   }, []);
 
   const handleVerify = useCallback(() => {
     const newAttempts = attempts + 1;
     setAttempts(newAttempts);
 
-    // After 3 failed attempts, pass automatically so demo never gets stuck
-    if (newAttempts >= 3 || Math.random() > 0.7) {
+    // Cores obrigatórias para passar
+    const requiredColors = ["bg-red-500", "bg-yellow-500", "bg-green-500"];
+    
+    // Verificar o que o usuário selecionou
+    const selectedColors = selected.map(index => images[index]);
+    
+    // O usuário deve ter selecionado pelo menos um vermelho, um amarelo e um verde
+    const hasAllRequired = requiredColors.every(c => selectedColors.includes(c));
+    
+    // O usuário NÃO pode ter selecionado nenhuma outra cor além das três
+    const hasOnlyRequired = selectedColors.every(c => requiredColors.includes(c));
+    
+    // O usuário deve ter selecionado TODOS os quadrados vermelhos, amarelos e verdes do grid
+    const allRequiredInGridSelected = images.every((c, index) => {
+      if (requiredColors.includes(c)) return selected.includes(index);
+      return true;
+    });
+
+    if (hasAllRequired && hasOnlyRequired && allRequiredInGridSelected) {
       onVerify(true);
     } else {
-      alert("Tente novamente. Novos desafios foram carregados.");
+      alert("Tente novamente. Você não selecionou corretamente todas as cores de um semáforo (vermelho, amarelo, verde) ou selecionou cores erradas.");
       setSelected([]);
       setImages(randomGrid());
-      setInstruction(randomInstruction());
       onVerify(false);
     }
-  }, [onVerify, attempts]);
+  }, [onVerify, attempts, selected, images]);
 
   return (
     <div className="bg-white p-3 sm:p-4 border border-gray-300 shadow-xl max-w-sm w-full mx-auto font-sans text-black">
       <div className="bg-blue-600 text-white p-3 sm:p-4 mb-4">
         <p className="text-sm">Selecione todas as imagens com</p>
-        <p className="text-xl sm:text-2xl font-bold">{instruction}</p>
+        <p className="text-xl sm:text-2xl font-bold">{INSTRUCTIONS[0]}</p>
       </div>
 
       <div className="grid grid-cols-3 gap-1 mb-4">

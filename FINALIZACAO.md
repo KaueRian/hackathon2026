@@ -86,8 +86,11 @@ Escolha qualquer pergunta e escreva qualquer resposta. Ex: `Bolinha`
 
 > Aqui está o desafio final antes de terminar!
 
-- O **resumo dos seus dados** vai aparecer trocado — ignore, é de propósito.
-- O **CAPTCHA** mostra uma conta de matemática mas pede "as letras da imagem". Clique em qualquer quadrado colorido e tente verificar. **Na 3ª tentativa ele passa automaticamente** (pode tentar logo de cara, mas vá clicando).
+### reCAPTCHA Troll:
+
+- A instrução será sempre para selecionar "as cores de um semáforo".
+- Você **precisa** clicar EXATAMENTE nos quadrados que são: **Vermelho**, **Amarelo** e **Verde**.
+- Se você clicar em qualquer outra cor, ou esquecer de alguma dessas três, vai dar erro e embaralhar tudo de novo.
 - O botão **"Confirmar Cadastro" foge do mouse** — mova o mouse devagar e tente encurralar o botão no canto da tela.
 - Vai aparecer um pop-up **"Tem certeza?"** com os botões trocados:
   - Clique em **"Cancelar"** para confirmar de verdade.
