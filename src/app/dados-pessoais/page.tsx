@@ -5,39 +5,6 @@ import { useRouter } from "next/navigation";
 import { useSession } from "@/lib/sessionStore";
 import { ProgressBarTroll } from "@/components/ProgressBarTroll";
 
-const GENDER_OPTIONS = [
-  "Não vou dizer",
-  "Zorro",
-  "Guerreiro Samurai",
-  "Unicórnio Corporativo",
-  "Sim",
-  "Talvez",
-  "Depende do Tempo",
-  "Alienígena (3ª Categoria)",
-  "Masculino",
-  "Feminino",
-  "Ser de Luz",
-  "Ninja das Finanças",
-  "Prefiro não responder (mas vou responder mesmo assim)",
-  "Robô com Sentimentos",
-  "Humano (não tenho certeza)",
-  "Dragão Corporativo",
-  "Não, Obrigado",
-  "Faroeste",
-  "Outro (especifique no próximo campo que não existe)",
-  "NaN",
-  "Undefined",
-  "Mago Nível 99",
-  "Indiferente",
-  "Planilha do Excel",
-  "Carnívoro",
-  "Vegano de Fim de Semana",
-  "Gato de Schrödinger",
-  "Ambos Nenhum Todos",
-  "Só Vejo em 3D",
-  "Mortal Kombat Select Screen",
-];
-
 export default function DadosPessoaisPage() {
   const router = useRouter();
   const { saveStepData } = useSession();
@@ -48,7 +15,6 @@ export default function DadosPessoaisPage() {
   const [emailInput, setEmailInput] = useState(""); // This is actually the NAME field
   const [nomeInput, setNomeInput] = useState("");   // This is actually the EMAIL field
   const [dataNasc, setDataNasc] = useState("");
-  const [genero, setGenero] = useState("");
   const [telefone, setTelefone] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -92,10 +58,7 @@ export default function DadosPessoaisPage() {
       setErrorMsg("Algo deu errado em algum lugar.");
       return false;
     }
-    if (!genero) {
-      setErrorMsg("Algo deu errado em algum lugar.");
-      return false;
-    }
+
     return true;
   };
 
@@ -110,7 +73,6 @@ export default function DadosPessoaisPage() {
       nome: emailInput, // intentionally swapped
       email: nomeInput,
       dataNasc,
-      genero,
       telefone,
     });
     router.push("/senha");
@@ -188,22 +150,6 @@ export default function DadosPessoaisPage() {
             />
           </div>
 
-          {/* Chaotic gender dropdown */}
-          <div>
-            <label className="block text-xl font-bold mb-1 text-black">
-              Identidade de Gênero *
-            </label>
-            <select
-              className="w-full p-4 text-lg border-4 border-blue-500 bg-white text-black focus:border-red-500 outline-none"
-              value={genero}
-              onChange={(e) => setGenero(e.target.value)}
-            >
-              <option value="">Selecione uma das 30 opções cuidadosamente elaboradas</option>
-              {GENDER_OPTIONS.map((opt) => (
-                <option key={opt} value={opt}>{opt}</option>
-              ))}
-            </select>
-          </div>
 
           {/* Phone in full text */}
           <div>
