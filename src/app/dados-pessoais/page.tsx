@@ -259,7 +259,7 @@ export default function DadosPessoaisPage() {
           </div>
         )}
 
-        <div className="mt-6 flex justify-end" ref={bottomRef}>
+        <div className="mt-6 sm:mt-10 flex flex-col sm:flex-row gap-4 justify-between" ref={bottomRef}>
           <button
             onClick={handleNext}
             disabled={!hasScrolled}

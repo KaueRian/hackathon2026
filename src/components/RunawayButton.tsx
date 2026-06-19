@@ -16,8 +16,9 @@ export function RunawayButton({
 
   const handleMouseEnter = () => {
     // Generate random coordinates within a small range to jump away
-    const jumpX = (Math.random() - 0.5) * 300;
-    const jumpY = (Math.random() - 0.5) * 300;
+    const maxJump = typeof window !== 'undefined' && window.innerWidth < 600 ? 100 : 300;
+    const jumpX = (Math.random() - 0.5) * maxJump;
+    const jumpY = (Math.random() - 0.5) * maxJump;
     
     setPosition({ x: jumpX, y: jumpY });
   };

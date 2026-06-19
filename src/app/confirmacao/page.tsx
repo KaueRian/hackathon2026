@@ -120,7 +120,7 @@ export default function ConfirmacaoPage() {
         </div>
 
         {!loading && (
-          <div className="mt-8 flex justify-between items-center">
+          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-between items-center">
             <button
               onClick={() => router.back()}
               className="px-8 py-4 text-xl font-black uppercase border-4 border-black bg-white text-black hover:bg-black hover:text-white"

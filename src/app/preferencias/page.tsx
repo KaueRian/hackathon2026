@@ -199,7 +199,7 @@ export default function PreferenciasPage() {
           </div>
         </div>
 
-        <div className="mt-6 flex justify-between">
+        <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-between">
           <button
             onClick={() => router.back()}
             className="px-8 py-4 text-xl font-black uppercase border-4 border-black bg-white text-black hover:bg-black hover:text-white"
