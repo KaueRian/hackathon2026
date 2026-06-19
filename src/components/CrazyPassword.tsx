@@ -11,14 +11,14 @@ export function CrazyPassword({
 }) {
   const [showEmojis, setShowEmojis] = useState(false);
 
-  // Mapeia letras para emojis aleatórios ou mantém asteriscos
+  // Mapeia letras para hieróglifos aleatórios ou mantém asteriscos
   const getDisplayValue = () => {
     if (!showEmojis) return "•".repeat(value.length);
     
-    const emojis = ["🙈", "💩", "🦄", "🤡", "💀", "👻", "🌶️", "🍆", "🐸"];
+    const symbols = ["𓀀", "𓀁", "𓀂", "𓀃", "𓀄", "𓀅", "𓀆", "𓀇", "𓀈", "𓀉", "𓀊", "𓀋", "𓀌", "𓀍"];
     return value.split("").map((char) => {
-      // Usa o código do caractere para pegar um emoji "consistente" mas inútil
-      return emojis[char.charCodeAt(0) % emojis.length];
+      // Usa o código do caractere para pegar um símbolo "consistente" mas inútil
+      return symbols[char.charCodeAt(0) % symbols.length];
     }).join("");
   };
 
@@ -47,7 +47,7 @@ export function CrazyPassword({
         className="self-start text-xs underline text-blue-800"
         onClick={() => setShowEmojis(!showEmojis)}
       >
-        {showEmojis ? "Ocultar Senha" : "Mostrar Senha (Formato Emoji)"}
+        {showEmojis ? "Ocultar Senha" : "Mostrar Senha (Formato Hieróglifo)"}
       </button>
 
       {value.length > 0 && value.length < 8 && (
