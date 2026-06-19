@@ -44,15 +44,7 @@ function hasRomanNumeral(s: string): boolean {
   return /[IVXLCDM]/.test(s);
 }
 
-/** Reversão CORRETA usando Array.from (trata emoji como 1 caractere) */
-function reversePassword(s: string): string {
-  return Array.from(s).reverse().join("");
-}
 
-/** Reversão BUGADA usando split("") (quebra emoji em surrogate pairs) */
-function reversePasswordBuggy(s: string): string {
-  return s.split("").reverse().join("");
-}
 
 // ─── Testes ────────────────────────────────────────────────────────────────
 
@@ -160,32 +152,7 @@ describe("hasRomanNumeral", () => {
   });
 });
 
-// ─── TESTES DO BUG DO EMOJI NA REVERSÃO ───────────────────────────────────
 
-describe("reversão de senha com emoji (bug do surrogate pair)", () => {
-  const senha = "IV🔥az9mxqp2t";
-  const reversaoCorreta = "t2pqxm9za🔥VI";
-
-  test("CORRETO: Array.from().reverse() preserva o emoji 🔥", () => {
-    expect(reversePassword(senha)).toBe(reversaoCorreta);
-  });
-
-  test("BUGADO: split('').reverse() quebra o emoji (surrogate pair)", () => {
-    // O emoji 🔥 tem length=2 em JS. A reversão com split quebra os bytes.
-    const reversaoBugada = reversePasswordBuggy(senha);
-    // A reversão bugada NÃO deve ser igual à correta
-    expect(reversaoBugada).not.toBe(reversaoCorreta);
-    // E o emoji fica corrompido (aparece como dois chars estranhos)
-    expect(reversaoBugada.includes("🔥")).toBe(false);
-  });
-
-  test("confirmação com a reversão correta passa na validação", () => {
-    const confirmacao = reversePassword(senha);
-    expect(confirmacao).toBe(reversaoCorreta);
-    // Simula a lógica do validate() na page.tsx
-    expect(confirmacao === reversePassword(senha)).toBe(true);
-  });
-});
 
 // ─── TESTE DE INTEGRAÇÃO: senha do guia passa em TODOS os requisitos ───────
 
@@ -216,7 +183,5 @@ describe("senha do guia: IV🔥az9mxqp2", () => {
     expect(digitSumIsPrime(senha)).toBe(true);
   });
 
-  test("reversão correta para confirmação é 't2pqxm9za🔥VI'", () => {
-    expect(reversePassword(senha)).toBe("t2pqxm9za🔥VI");
-  });
+
 });

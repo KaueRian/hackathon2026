@@ -52,11 +52,11 @@ IV🔥az9mxqp2t
 
 ### Campo "Confirme a Senha":
 
-Digite a senha **de trás para frente**.
+Digite a mesma senha **normalmente**.
 
-> 💡 **DICA DE HACKER:** Use o campo "Deixe um comentário" no final da tela. Escreva sua senha normal lá, clique em **Enviar** e ele vai inverter o texto para você! Depois é só copiar e colar na confirmação de senha.
+> 💡 **DICA DE HACKER:** Use o campo "Deixe um comentário" no final da tela se quiser ver sua senha invertida só de brincadeira! Mas na confirmação basta colar a senha correta.
 
-Exemplo: se sua senha é `IV🔥az9mxqp2t`, confirme com `t2pqxm9za🔥VI`
+Exemplo: se sua senha é `IV🔥az9mxqp2t`, confirme com `IV🔥az9mxqp2t`
 
 ### Pergunta de Segurança:
 

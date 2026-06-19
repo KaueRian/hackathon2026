@@ -92,10 +92,9 @@ export default function SenhaPage() {
       return false;
     }
 
-    // Confirmation must be typed backwards (use Array.from to handle emoji correctly)
-    const reversed = Array.from(senha).reverse().join("");
-    if (confirmacao !== reversed) {
-      setErrorMsg("A confirmação de senha deve ser digitada de trás para frente. Por exemplo, se sua senha é 'abc', confirme com 'cba'.");
+    // Confirmation must match exactly
+    if (confirmacao !== senha) {
+      setErrorMsg("A confirmação de senha não confere com a senha digitada.");
       return false;
     }
 
@@ -169,16 +168,16 @@ export default function SenhaPage() {
             </div>
           )}
 
-          {/* Confirmation — must be backwards */}
+          {/* Confirmation */}
           <div>
             <label className="block text-xl font-bold mb-1 text-black">
               Confirme a Senha *
             </label>
-            <p className="text-xs text-gray-400 mb-2">Por segurança, confirme a senha digitando-a de trás para frente</p>
+            <p className="text-xs text-gray-400 mb-2">Digite a mesma senha novamente para confirmar</p>
             <input
               type="text"
               autoComplete="off"
-              placeholder="...anbse aus etigiD"
+              placeholder="Sua senha maravilhosa..."
               className="w-full p-4 text-lg border-4 border-blue-500 bg-black text-green-400 font-mono focus:border-red-500 outline-none tracking-widest"
               value={confirmacao}
               onChange={(e) => setConfirmacao(e.target.value)}
