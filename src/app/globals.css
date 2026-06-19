@@ -28,7 +28,7 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: var(--font-sans);
-  cursor: url("/mouse.png") 16 16, auto;
+  cursor: url("/mouse.png") 0 0, auto;
 }
 
 /* Horrible global animations */
