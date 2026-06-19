@@ -22,7 +22,8 @@
 | :--- | :--- |
 | **"E-mail \*"** (1º campo) | Seu **nome**, sem espaços. Ex: `JoaoSilva` |
 | **"Nome Completo \*"** (2º campo) | Seu **e-mail** — mas com `$` junto do `@`. Ex: `joao$@gmail.com` |
-| **"Data de Nascimento \*"** | Data no formato `AAAA/DD/MM`. Ex: `2000/15/03` |
+| **"Ano de Nascimento \*"** | Selecione o famoso que nasceu no seu ano |
+| **"Hora de Nascimento \*"** | Formato com dois pontos. Ex: `14:30` |
 | **"Telefone"** | Números **por extenso**. Ex: `nove nove meia dois...` (opcional) |
 
 4. **Role a página até o final** e **espere 5 segundos** (o botão "Próximo" tem um delay de propósito para fazer o usuário achar que travou).

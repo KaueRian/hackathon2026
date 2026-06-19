@@ -5,6 +5,47 @@ import { useRouter } from "next/navigation";
 import { useSession } from "@/lib/sessionStore";
 import { ProgressBarTroll } from "@/components/ProgressBarTroll";
 
+const FAMOUS_BIRTHS = [
+  { year: 1980, name: "Kim Kardashian" },
+  { year: 1981, name: "Beyoncé" },
+  { year: 1982, name: "Príncipe William" },
+  { year: 1983, name: "Chris Hemsworth" },
+  { year: 1984, name: "Mark Zuckerberg" },
+  { year: 1985, name: "Cristiano Ronaldo" },
+  { year: 1986, name: "Lady Gaga" },
+  { year: 1987, name: "Lionel Messi" },
+  { year: 1988, name: "Rihanna" },
+  { year: 1989, name: "Taylor Swift" },
+  { year: 1990, name: "Emma Watson" },
+  { year: 1991, name: "Ed Sheeran" },
+  { year: 1992, name: "Neymar Jr." },
+  { year: 1993, name: "Ariana Grande" },
+  { year: 1994, name: "Justin Bieber" },
+  { year: 1995, name: "Dua Lipa" },
+  { year: 1996, name: "Tom Holland" },
+  { year: 1997, name: "Kylie Jenner" },
+  { year: 1998, name: "Shawn Mendes" },
+  { year: 1999, name: "Lil Nas X" },
+  { year: 2000, name: "Vinícius Júnior" },
+  { year: 2001, name: "Billie Eilish" },
+  { year: 2002, name: "Finn Wolfhard" },
+  { year: 2003, name: "Olivia Rodrigo" },
+  { year: 2004, name: "Millie Bobby Brown" },
+  { year: 2005, name: "Noah Schnapp" },
+  { year: 2006, name: "Xochitl Gomez" },
+  { year: 2007, name: "Melody" },
+  { year: 2008, name: "Iain Armitage" },
+  { year: 2009, name: "Julia Butters" },
+  { year: 2010, name: "Cristiano Ronaldo Jr." },
+  { year: 2011, name: "Blue Ivy Carter" },
+  { year: 2012, name: "North West" },
+  { year: 2013, name: "Príncipe George" },
+  { year: 2014, name: "Princesa Charlotte" },
+  { year: 2015, name: "Saint West" },
+  { year: 2016, name: "Dream Kardashian" },
+].sort((a, b) => a.name.localeCompare(b.name));
+
+
 export default function DadosPessoaisPage() {
   const router = useRouter();
   const { saveStepData } = useSession();
@@ -14,7 +55,8 @@ export default function DadosPessoaisPage() {
   // Swapped labels on purpose (UX violation)
   const [emailInput, setEmailInput] = useState(""); // This is actually the NAME field
   const [nomeInput, setNomeInput] = useState("");   // This is actually the EMAIL field
-  const [dataNasc, setDataNasc] = useState("");
+  const [anoFamoso, setAnoFamoso] = useState("");
+  const [horaNasc, setHoraNasc] = useState("");
   const [telefone, setTelefone] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -52,10 +94,14 @@ export default function DadosPessoaisPage() {
       setErrorMsg("Algo deu errado em algum lugar. (Dica: seu e-mail parece incorreto para nosso sistema avançado)");
       return false;
     }
-    // Absurd date format: AAAA/DD/MM
-    const dateRegex = /^\d{4}\/\d{2}\/\d{2}$/;
-    if (!dateRegex.test(dataNasc)) {
-      setErrorMsg("Algo deu errado em algum lugar.");
+    // Absurd date validation: ensure they picked someone
+    if (!anoFamoso) {
+      setErrorMsg("Você precisa escolher de qual famoso você roubou o ano de nascimento.");
+      return false;
+    }
+    // Absurd time format: must contain the word "horas" or something, but let's just make it required
+    if (!horaNasc.includes(":")) {
+      setErrorMsg("A hora de nascimento deve conter dois pontos (:), ex: 14:30");
       return false;
     }
 
@@ -72,7 +118,8 @@ export default function DadosPessoaisPage() {
     saveStepData("dadosPessoais", {
       nome: emailInput, // intentionally swapped
       email: nomeInput,
-      dataNasc,
+      anoNascimento: anoFamoso,
+      horaNascimento: horaNasc,
       telefone,
     });
     router.push("/senha");
@@ -134,20 +181,41 @@ export default function DadosPessoaisPage() {
             )}
           </div>
 
-          {/* Absurd date format */}
-          <div>
-            <label className="block text-xl font-bold mb-1 text-black">
-              Data de Nascimento *
-            </label>
-            <p className="text-xs text-gray-400 mb-2">Use o formato obrigatório: AAAA/DD/MM (ex: 1990/25/07)</p>
-            <input
-              type="text"
-              autoComplete="off"
-              placeholder="AAAA/DD/MM"
-              className="w-full p-4 text-lg border-4 border-blue-500 bg-white text-black font-mono focus:border-red-500 outline-none"
-              value={dataNasc}
-              onChange={(e) => setDataNasc(e.target.value)}
-            />
+          {/* Famous birth year and time */}
+          <div className="flex flex-col gap-4">
+            <div>
+              <label className="block text-xl font-bold mb-1 text-black">
+                Ano de Nascimento *
+              </label>
+              <p className="text-xs text-gray-400 mb-2">Selecione o famoso que nasceu no mesmo ano que você</p>
+              <select
+                className="w-full p-4 text-lg border-4 border-blue-500 bg-white text-black focus:border-red-500 outline-none"
+                value={anoFamoso}
+                onChange={(e) => setAnoFamoso(e.target.value)}
+              >
+                <option value="">Selecione seu gêmeo astral de ano...</option>
+                {FAMOUS_BIRTHS.map((f) => (
+                  <option key={f.year} value={f.year}>
+                    {f.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-xl font-bold mb-1 text-black">
+                Hora de Nascimento *
+              </label>
+              <p className="text-xs text-gray-400 mb-2">Aproximadamente que horas o evento ocorreu? (Use &quot;:&quot;)</p>
+              <input
+                type="text"
+                autoComplete="off"
+                placeholder="Ex: 14:30"
+                className="w-full p-4 text-lg border-4 border-blue-500 bg-white text-black font-mono focus:border-red-500 outline-none"
+                value={horaNasc}
+                onChange={(e) => setHoraNasc(e.target.value)}
+              />
+            </div>
           </div>
 
 
