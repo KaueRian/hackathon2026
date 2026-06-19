@@ -34,10 +34,6 @@ export function ProgressBarTroll() {
           className="bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 h-full transition-all duration-300 ease-out"
           style={{ width: `${progress}%` }}
         />
-        {/* Fake text that's hard to read */}
-        <span className="absolute inset-0 flex items-center justify-center text-white mix-blend-difference font-bold tracking-widest text-sm opacity-50">
-          QUASE LÁ... MENTIRA
-        </span>
       </div>
     </div>
   );
