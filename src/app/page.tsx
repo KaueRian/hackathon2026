@@ -41,7 +41,7 @@ export default function LandingPage() {
           <Link 
             href="/dados-pessoais" 
             onClick={() => startSession()}
-            className="text-[10px] text-yellow-300 hover:text-white opacity-40 select-none"
+            className="text-sm text-yellow-600 hover:text-white opacity-70 select-none secret-button-flash"
           >
             sim, eu quero sofrer (clique aqui)
           </Link>

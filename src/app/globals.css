@@ -116,3 +116,23 @@ input:focus {
 ::-webkit-scrollbar-thumb:hover {
   background: #0000ff;
 }
+
+/* Secret button flash animation */
+.secret-button-flash {
+  animation: flashSecret 5s ease-in-out infinite;
+  display: inline-block;
+}
+
+@keyframes flashSecret {
+  0%, 90%, 100% { 
+    opacity: 0.7; 
+    color: #ca8a04; /* text-yellow-600 */
+  }
+  95% { 
+    opacity: 1; 
+    color: #713f12; /* text-yellow-900 - double the contrast */
+    font-weight: 900;
+    transform: scale(1.5);
+    background-color: #fef08a; /* bg-yellow-200 */
+  }
+}
