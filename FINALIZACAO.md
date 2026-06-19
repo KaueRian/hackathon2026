@@ -49,7 +49,6 @@ IV🔥az9mxqp2t
 - ✅ Tem exatamente 2 letras maiúsculas: `I` e `V`
 - ✅ Soma dos dígitos: `9 + 2 = 11` (número primo ✓)
 
-> ⚠️ Não fique parado por mais de **10 segundos** — o campo apaga sozinho!
 
 ### Campo "Confirme a Senha":
 
