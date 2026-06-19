@@ -52,13 +52,19 @@ export default function DadosPessoaisPage() {
   const [telefone, setTelefone] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
-  // Track scroll to enable the "Próximo" button
+  const timeoutStartedRef = useRef(false);
+
+  // Track scroll to enable the "Próximo" button (with a troll delay)
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY + window.innerHeight;
       const docHeight = document.documentElement.scrollHeight;
-      if (scrollY >= docHeight - 10) {
-        setHasScrolled(true);
+      if (scrollY >= docHeight - 10 && !timeoutStartedRef.current) {
+        timeoutStartedRef.current = true;
+        // Troll: Make them wait 5 seconds at the bottom without any feedback
+        setTimeout(() => {
+          setHasScrolled(true);
+        }, 5000);
       }
     };
     window.addEventListener("scroll", handleScroll);

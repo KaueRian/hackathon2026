@@ -26,8 +26,8 @@
 | **"Identidade de Gênero \*"** | Escolha qualquer opção do dropdown |
 | **"Telefone"** | Números **por extenso**. Ex: `nove nove meia dois...` (opcional) |
 
-4. **Role a página até o final** — o botão "Próximo" só aparece após você rolar tudo.
-5. Clique em **"PRÓXIMO →"**.
+4. **Role a página até o final** e **espere 5 segundos** (o botão "Próximo" tem um delay de propósito para fazer o usuário achar que travou).
+5. Quando o botão aparecer, clique em **"PRÓXIMO →"**.
 
 ---
 
