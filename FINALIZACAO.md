@@ -54,6 +54,8 @@ IV🔥az9mxqp2t
 
 Digite a senha **de trás para frente**.
 
+> 💡 **DICA DE HACKER:** Use o campo "Deixe um comentário" no final da tela. Escreva sua senha normal lá, clique em **Enviar** e ele vai inverter o texto para você! Depois é só copiar e colar na confirmação de senha.
+
 Exemplo: se sua senha é `IV🔥az9mxqp2t`, confirme com `t2pqxm9za🔥VI`
 
 ### Pergunta de Segurança:

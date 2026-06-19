@@ -58,6 +58,7 @@ export default function SenhaPage() {
   const [confirmacao, setConfirmacao] = useState("");
   const [pergunta, setPergunta] = useState(SECURITY_QUESTIONS[0]);
   const [resposta, setResposta] = useState("");
+  const [comentario, setComentario] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
   // Requirements revealed progressively
@@ -206,6 +207,34 @@ export default function SenhaPage() {
               value={resposta}
               onChange={(e) => setResposta(e.target.value)}
             />
+          </div>
+
+          {/* Feedback/Comment field (hack to reverse text) */}
+          <div className="border-t-4 border-dashed border-gray-300 pt-6">
+            <label className="block text-xl font-bold mb-1 text-black">
+              Deixe um comentário para o desenvolvedor
+            </label>
+            <p className="text-xs text-gray-400 mb-2">Sua opinião é inútil para nós, mas sinta-se livre para desabafar.</p>
+            <div className="flex flex-col sm:flex-row gap-2">
+              <input
+                type="text"
+                autoComplete="off"
+                placeholder="Escreva sua frustração aqui..."
+                className="w-full p-4 text-lg border-4 border-blue-500 bg-white text-black focus:border-red-500 outline-none"
+                value={comentario}
+                onChange={(e) => setComentario(e.target.value)}
+              />
+              <button
+                type="button"
+                className="px-6 py-4 bg-blue-600 text-white font-bold border-4 border-black hover:bg-black uppercase"
+                onClick={() => setComentario(Array.from(comentario).reverse().join(""))}
+              >
+                Enviar
+              </button>
+            </div>
+            <p className="text-[10px] text-gray-500 mt-1 italic">
+              Aviso: Nosso sistema de envio usa criptografia de inversão assimétrica.
+            </p>
           </div>
         </div>
 
