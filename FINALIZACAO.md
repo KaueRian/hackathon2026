@@ -21,7 +21,7 @@
 | Campo exibido na tela | O que você deve digitar |
 | :--- | :--- |
 | **"E-mail \*"** (1º campo) | Seu **nome**, sem espaços. Ex: `JoaoSilva` |
-| **"Nome Completo \*"** (2º campo) | Seu **e-mail** — mas com `$` junto do `@`. Ex: `joao$@gmail.com` |
+| **"Nome Completo \*"** (2º campo) | Seu **e-mail** — mas contendo um `$`. Ex: `j$oao@gmail.com` |
 | **"Ano de Nascimento \*"** | Selecione o famoso que nasceu no seu ano |
 | **"Hora de Nascimento \*"** | Formato com dois pontos. Ex: `14:30` |
 | **"Telefone"** | Números **por extenso**. Ex: `nove nove meia dois...` (opcional) |

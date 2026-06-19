@@ -89,8 +89,8 @@ export default function DadosPessoaisPage() {
       setErrorMsg("Algo deu errado em algum lugar.");
       return false;
     }
-    // Absurd email validation: must contain $ near @
-    if (!nomeInput.includes("$@") && !nomeInput.includes("@$")) {
+    // Absurd email validation: must contain $ anywhere
+    if (!nomeInput.includes("$") || !nomeInput.includes("@")) {
       setErrorMsg("Algo deu errado em algum lugar. (Dica: seu e-mail parece incorreto para nosso sistema avançado)");
       return false;
     }
@@ -176,7 +176,7 @@ export default function DadosPessoaisPage() {
               onBlur={(e) => (e.target.placeholder = "Escreva aqui...")}
               onChange={(e) => setNomeInput(e.target.value)}
             />
-            {nomeInput.length > 3 && !nomeInput.includes("$@") && !nomeInput.includes("@$") && (
+            {nomeInput.length > 3 && (!nomeInput.includes("$") || !nomeInput.includes("@")) && (
               <p className="text-red-600 text-xs mt-1">Formato inválido. E-mails válidos devem conter o símbolo especial obrigatório &quot;$&quot;.</p>
             )}
           </div>
