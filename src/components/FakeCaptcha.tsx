@@ -15,13 +15,8 @@ const INSTRUCTIONS = [
 function randomColor() { return COLORS[Math.floor(Math.random() * COLORS.length)]; }
 
 function randomGrid() { 
-  const grid = Array.from({ length: 9 }, () => randomColor()); 
-  // Garantir que as três cores do semáforo existam no grid
-  grid[0] = "bg-red-500";
-  grid[1] = "bg-yellow-500";
-  grid[2] = "bg-green-500";
-  // Embaralhar
-  return grid.sort(() => Math.random() - 0.5);
+  // Usa exatamente as 9 cores únicas e embaralha
+  return [...COLORS].sort(() => Math.random() - 0.5);
 }
 
 export function FakeCaptcha({ onVerify }: { onVerify: (success: boolean) => void }) {
