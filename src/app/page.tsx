@@ -1,65 +1,59 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import Link from "next/link";
+import { CookiePopup } from "@/components/CookiePopup";
+import { FakeTimer } from "@/components/FakeTimer";
+import { useSession } from "@/lib/sessionStore";
+import { RunawayButton } from "@/components/RunawayButton";
+
+export default function LandingPage() {
+  const { startSession } = useSession();
+
+  // Reset any session if we land on the landing page again (or maybe not? The PRD says timer starts when clicking the real link)
+  // We'll just provide a way to start the session on the real link click.
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <main className="min-h-screen w-full flex flex-col items-center justify-center p-4 sm:p-8 bg-[var(--background)] overflow-hidden relative">
+      <CookiePopup />
+      <FakeTimer />
+
+      {/* Chaos background elements */}
+      <div className="absolute top-10 left-10 w-32 h-32 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-bounce"></div>
+      <div className="absolute bottom-10 right-10 w-48 h-48 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
+
+      <div className="z-10 flex flex-col items-center text-center max-w-4xl border-4 sm:border-8 border-dashed border-red-600 p-6 sm:p-12 bg-yellow-200 troll-shake mx-2">
+        <h1 className="text-5xl sm:text-7xl font-black mb-6 text-[#ff00ea] drop-shadow-[5px_5px_0_#00ff08] tracking-tighter uppercase">
+          Bem-vindo ao <br/> FormHell
+        </h1>
+        
+        <p className="text-2xl mb-12 font-bold text-blue-800">
+          Você tem absoluta certeza de que quer continuar? <br/>
+          Sua paciência será testada.
+        </p>
+
+        {/* The giant "NO" button that does nothing but run away */}
+        <RunawayButton className="text-3xl sm:text-6xl px-8 sm:px-16 py-4 sm:py-8 bg-red-600 hover:bg-red-700 text-white border-8 sm:border-[10px] border-black uppercase font-black tracking-widest shadow-[10px_10px_0_#000] sm:shadow-[20px_20px_0_#000]">
+          NÃO, OBRIGADO ME TIRE DAQUI!
+        </RunawayButton>
+
+        {/* The real link that is almost invisible */}
+        <div className="mt-32">
+          <Link 
+            href="/dados-pessoais" 
+            onClick={() => startSession()}
+            className="text-sm text-yellow-600 hover:text-white opacity-70 select-none secret-button-flash"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            sim, eu quero sofrer (clique aqui)
+          </Link>
         </div>
-      </main>
-    </div>
+      </div>
+      
+      {/* Distracting marquee */}
+      <div className="fixed bottom-0 w-full bg-black text-[#00ff08] font-mono text-xl whitespace-nowrap overflow-hidden py-2 z-40 border-t-4 border-red-600">
+        <div className="inline-block animate-[spin_20s_linear_infinite]">
+          ⚠ ATENÇÃO: NOSSOS TERMOS DE SERVIÇO FORAM ATUALIZADOS HÁ 3 SEGUNDOS. VOCÊ DEVE LER TUDO NOVAMENTE. ⚠ SEUS DADOS ESTÃO SENDO VENDIDOS NESTE EXATO MOMENTO. ⚠ O TEMPO ESTÁ ACABANDO! ⚠
+        </div>
+      </div>
+    </main>
   );
 }
