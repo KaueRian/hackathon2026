@@ -93,7 +93,9 @@ input[type="email"] {
   outline: none;
 }
 
-input:focus {
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus {
   border: 3px dotted #0000ff;
   background-color: #ffffff;
   color: #000000;
