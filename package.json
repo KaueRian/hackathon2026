@@ -6,12 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint",
+    "lint:fix": "eslint . --fix",
     "test": "jest"
   },
   "dependencies": {
     "@cloudflare/next-on-pages": "^1.13.16",
     "@supabase/supabase-js": "^2.108.2",
+    "d3-scale": "^4.0.2",
     "framer-motion": "^12.40.0",
     "lucide-react": "^1.21.0",
     "next": "^15.5.2",

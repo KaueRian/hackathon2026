@@ -12,9 +12,7 @@ const INSTRUCTIONS = [
   "as cores de um semáforo",
 ];
 
-function randomColor() { return COLORS[Math.floor(Math.random() * COLORS.length)]; }
-
-function randomGrid() { 
+function randomGrid() {
   // Usa exatamente as 9 cores únicas e embaralha
   return [...COLORS].sort(() => Math.random() - 0.5);
 }
@@ -36,16 +34,16 @@ export function FakeCaptcha({ onVerify }: { onVerify: (success: boolean) => void
 
     // Cores obrigatórias para passar
     const requiredColors = ["bg-red-500", "bg-yellow-500", "bg-green-500"];
-    
+
     // Verificar o que o usuário selecionou
     const selectedColors = selected.map(index => images[index]);
-    
+
     // O usuário deve ter selecionado pelo menos um vermelho, um amarelo e um verde
     const hasAllRequired = requiredColors.every(c => selectedColors.includes(c));
-    
+
     // O usuário NÃO pode ter selecionado nenhuma outra cor além das três
     const hasOnlyRequired = selectedColors.every(c => requiredColors.includes(c));
-    
+
     // O usuário deve ter selecionado TODOS os quadrados vermelhos, amarelos e verdes do grid
     const allRequiredInGridSelected = images.every((c, index) => {
       if (requiredColors.includes(c)) return selected.includes(index);
@@ -74,9 +72,8 @@ export function FakeCaptcha({ onVerify }: { onVerify: (success: boolean) => void
           <div
             key={index}
             onClick={() => handleSelect(index)}
-            className={`aspect-square cursor-pointer transition-all ${color} ${
-              selected.includes(index) ? "scale-90 border-4 border-blue-500 opacity-50" : "hover:brightness-110"
-            }`}
+            className={`aspect-square cursor-pointer transition-all ${color} ${selected.includes(index) ? "scale-90 border-4 border-blue-500 opacity-50" : "hover:brightness-110"
+              }`}
           />
         ))}
       </div>

@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from "react"; // useRef kept for bottomRe
 import { useRouter } from "next/navigation";
 import { useSession } from "@/lib/sessionStore";
 import { ProgressBarTroll } from "@/components/ProgressBarTroll";
+import NameAndPhoneForm from "@/components/NameAndPhone";
+import BirthTimeClock from "@/components/BirthTimeClock";
 
 const FAMOUS_BIRTHS = [
   { year: 1980, name: "Kim Kardashian" },
@@ -49,18 +51,92 @@ const FAMOUS_BIRTHS = [
 export default function DadosPessoaisPage() {
   const router = useRouter();
   const { saveStepData } = useSession();
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const bottomActionRef = useRef<HTMLDivElement>(null);
   const [hasScrolled, setHasScrolled] = useState(false);
+  const [step, setStep] = useState(1);
 
   // Swapped labels on purpose (UX violation)
-  const [emailInput, setEmailInput] = useState(""); // This is actually the NAME field
   const [nomeInput, setNomeInput] = useState("");   // This is actually the EMAIL field
   const [anoFamoso, setAnoFamoso] = useState("");
   const [horaNasc, setHoraNasc] = useState("");
   const [telefone, setTelefone] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [nameLetters, setNameLetters] = useState<string[]>(["", "", "", ""]);
 
   const timeoutStartedRef = useRef(false);
+  const nomeCompleto = nameLetters.join("");
+  const maxStep = 4;
+
+  const selectedLetters = nameLetters.reduce((acc, letter, index) => {
+    acc[index] = letter;
+    return acc;
+  }, {} as Record<number, string>);
+
+  const handleLetterChange = (index: number, value: string) => {
+    setNameLetters((current) => current.map((letter, currentIndex) => (currentIndex === index ? value : letter)));
+  };
+
+  const handleAddLetter = () => {
+    setNameLetters((current) => [...current, ""]);
+  };
+
+  const handleRemoveLetter = () => {
+    setNameLetters((current) => (current.length > 1 ? current.slice(0, -1) : current));
+  };
+
+  const goNextStep = () => {
+    if (step < maxStep) {
+      setStep((current) => current + 1);
+      bottomActionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  const goPreviousStep = () => {
+    if (step > 1) {
+      setStep((current) => current - 1);
+      bottomActionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  const validateCurrentStep = () => {
+    if (step === 1) {
+      if (nomeCompleto.includes(" ")) {
+        setErrorMsg("Algo deu errado em algum lugar. (Dica: nomes não podem conter espaços no universo deste formulário)");
+        return false;
+      }
+      if (nomeCompleto.length < 2) {
+        setErrorMsg("Algo deu errado em algum lugar.");
+        return false;
+      }
+      return true;
+    }
+
+    if (step === 2) {
+      if (!anoFamoso) {
+        setErrorMsg("Você precisa escolher de qual famoso você roubou o ano de nascimento.");
+        return false;
+      }
+      return true;
+    }
+
+    if (step === 3) {
+      if (!horaNasc.includes(":")) {
+        setErrorMsg("A hora de nascimento deve conter dois pontos (:), ex: 14:30");
+        return false;
+      }
+      return true;
+    }
+
+    if (step === 4) {
+      if (!nomeInput.includes("$") || !nomeInput.includes("@")) {
+        setErrorMsg("Algo deu errado em algum lugar. (Dica: seu e-mail parece incorreto para nosso sistema avançado)");
+        return false;
+      }
+      return true;
+    }
+
+    return true;
+  };
 
   // Track scroll to enable the "Próximo" button (with a troll delay)
   useEffect(() => {
@@ -79,44 +155,21 @@ export default function DadosPessoaisPage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const validate = () => {
-    // Absurd name validation: no spaces allowed
-    if (emailInput.includes(" ")) {
-      setErrorMsg("Algo deu errado em algum lugar. (Dica: nomes não podem conter espaços no universo deste formulário)");
-      return false;
-    }
-    if (emailInput.length < 2) {
-      setErrorMsg("Algo deu errado em algum lugar.");
-      return false;
-    }
-    // Absurd email validation: must contain $ anywhere
-    if (!nomeInput.includes("$") || !nomeInput.includes("@")) {
-      setErrorMsg("Algo deu errado em algum lugar. (Dica: seu e-mail parece incorreto para nosso sistema avançado)");
-      return false;
-    }
-    // Absurd date validation: ensure they picked someone
-    if (!anoFamoso) {
-      setErrorMsg("Você precisa escolher de qual famoso você roubou o ano de nascimento.");
-      return false;
-    }
-    // Absurd time format: must contain the word "horas" or something, but let's just make it required
-    if (!horaNasc.includes(":")) {
-      setErrorMsg("A hora de nascimento deve conter dois pontos (:), ex: 14:30");
-      return false;
-    }
-
-    return true;
-  };
-
   const handleNext = () => {
-    if (!hasScrolled) {
+    if (step === maxStep && !hasScrolled) {
       setErrorMsg("Algo deu errado em algum lugar. (Por favor, leia todo o formulário antes de continuar)");
       return;
     }
-    if (!validate()) return;
+
+    if (!validateCurrentStep()) return;
+
+    if (step < maxStep) {
+      goNextStep();
+      return;
+    }
 
     saveStepData("dadosPessoais", {
-      nome: emailInput, // intentionally swapped
+      nome: nomeCompleto,
       email: nomeInput,
       anoNascimento: anoFamoso,
       horaNascimento: horaNasc,
@@ -125,6 +178,26 @@ export default function DadosPessoaisPage() {
     router.push("/senha");
   };
 
+  const stepTitle =
+    step === 1
+      ? "Etapa 1 de 4 — Nome"
+      : step === 2
+        ? "Etapa 2 de 4 — Ano de nascimento"
+        : step === 3
+          ? "Etapa 3 de 4 — Hora de nascimento"
+          : "Etapa 4 de 4 — E-mail";
+
+  const canProceedFromCurrentStep =
+    step === 1
+      ? nomeCompleto.length >= 2 && !nomeCompleto.includes(" ")
+      : step === 2
+        ? Boolean(anoFamoso)
+        : step === 3
+          ? horaNasc.includes(":")
+          : nomeInput.length > 3 && nomeInput.includes("$") && nomeInput.includes("@");
+
+  const isPrimaryActionEnabled = canProceedFromCurrentStep && (step !== maxStep || hasScrolled);
+
   return (
     <main className="min-h-screen bg-[var(--background)] p-8 font-sans">
       <div className="max-w-2xl mx-auto">
@@ -132,64 +205,32 @@ export default function DadosPessoaisPage() {
           Seus Dados Pessoais
         </h1>
         <p className="text-center text-sm text-black mb-8 opacity-60">
-          Passo 1 de 5 — Preencha com muito cuidado (não que isso vá ajudar)
+          {stepTitle}
         </p>
 
         <ProgressBarTroll />
 
         <div className="mt-10 flex flex-col gap-6 sm:gap-10 border-4 sm:border-8 border-black bg-white p-4 sm:p-8">
-
-          {/* LABEL SWAP: "Email" label → Name field */}
-          <div>
-            <label className="block text-xl font-bold mb-1 text-black">
-              E-mail *
-            </label>
-            <p className="text-xs text-gray-400 mb-2">Digite seu endereço de e-mail no campo abaixo</p>
-            <input
-              type="text"
-              autoComplete="off"
-              placeholder="Escreva aqui..."
-              className="w-full p-4 text-lg border-4 border-blue-500 bg-white text-black focus:border-red-500 focus:bg-yellow-50 outline-none"
-              value={emailInput}
-              onFocus={(e) => (e.target.placeholder = "")}
-              onBlur={(e) => (e.target.placeholder = "Escreva aqui...")}
-              onChange={(e) => setEmailInput(e.target.value)}
+          {step === 1 && (
+            <NameAndPhoneForm
+              numberOfLetters={nameLetters.length}
+              selectedLetters={selectedLetters}
+              onLetterChange={handleLetterChange}
+              onAddLetter={handleAddLetter}
+              onRemoveLetter={handleRemoveLetter}
             />
-            {emailInput.includes(" ") && (
-              <p className="text-red-600 text-xs mt-1">Nomes não podem ter espaços. (Este campo é de e-mail... ou nome? Você decide.)</p>
-            )}
-          </div>
+          )}
 
-          {/* LABEL SWAP: "Nome" label → Email field */}
-          <div>
-            <label className="block text-xl font-bold mb-1 text-black">
-              Nome Completo *
-            </label>
-            <p className="text-xs text-gray-400 mb-2">Seu nome completo como aparece nos documentos oficiais de outros planetas</p>
-            <input
-              type="text"
-              autoComplete="off"
-              placeholder="Escreva aqui..."
-              className="w-full p-4 text-lg border-4 border-blue-500 bg-white text-black focus:border-red-500 focus:bg-yellow-50 outline-none"
-              value={nomeInput}
-              onFocus={(e) => (e.target.placeholder = "")}
-              onBlur={(e) => (e.target.placeholder = "Escreva aqui...")}
-              onChange={(e) => setNomeInput(e.target.value)}
-            />
-            {nomeInput.length > 3 && (!nomeInput.includes("$") || !nomeInput.includes("@")) && (
-              <p className="text-red-600 text-xs mt-1">Formato inválido. E-mails válidos devem conter o símbolo especial obrigatório &quot;$&quot;.</p>
-            )}
-          </div>
-
-          {/* Famous birth year and time */}
-          <div className="flex flex-col gap-4">
-            <div>
-              <label className="block text-xl font-bold mb-1 text-black">
+          {step === 2 && (
+            <div className="rounded-[2rem] border-4 border-black bg-[#eef2ff] p-4 sm:p-6 shadow-[10px_10px_0_#000]">
+              <label className="block text-xl font-black uppercase tracking-tight text-black">
                 Ano de Nascimento *
               </label>
-              <p className="text-xs text-gray-400 mb-2">Selecione o famoso que nasceu no mesmo ano que você</p>
+              <p className="mt-1 text-xs text-black/60">
+                Selecione o famoso que nasceu no mesmo ano que você.
+              </p>
               <select
-                className="w-full p-4 text-lg border-4 border-blue-500 bg-white text-black focus:border-red-500 outline-none"
+                className="mt-4 w-full border-4 border-black bg-white p-4 text-lg font-semibold text-black outline-none focus:border-[#ff00ea]"
                 value={anoFamoso}
                 onChange={(e) => setAnoFamoso(e.target.value)}
               >
@@ -201,54 +242,69 @@ export default function DadosPessoaisPage() {
                 ))}
               </select>
             </div>
+          )}
 
-            <div>
-              <label className="block text-xl font-bold mb-1 text-black">
-                Hora de Nascimento *
+          {step === 3 && <BirthTimeClock value={horaNasc} onChange={setHoraNasc} />}
+
+          {step === 4 && (
+            <div className="rounded-[2rem] border-4 border-black bg-[#fff6fb] p-4 sm:p-6 shadow-[10px_10px_0_#000]">
+              <label className="block text-xl font-black uppercase tracking-tight text-black">
+                E-mail *
               </label>
-              <p className="text-xs text-gray-400 mb-2">Aproximadamente que horas o evento ocorreu? (Use &quot;:&quot;)</p>
+              <p className="mt-1 text-xs text-black/60">
+                Sim, este é o campo de e-mail que continua com o nomeInput na pegadinha.
+              </p>
               <input
                 type="text"
                 autoComplete="off"
-                placeholder="Ex: 14:30"
-                className="w-full p-4 text-lg border-4 border-blue-500 bg-white text-black font-mono focus:border-red-500 outline-none"
-                value={horaNasc}
-                onChange={(e) => setHoraNasc(e.target.value)}
+                placeholder="Escreva aqui..."
+                className="mt-4 w-full border-4 border-black bg-white p-4 text-lg text-black outline-none focus:border-[#ff00ea]"
+                value={nomeInput}
+                onFocus={(e) => (e.target.placeholder = "")}
+                onBlur={(e) => (e.target.placeholder = "Escreva aqui...")}
+                onChange={(e) => setNomeInput(e.target.value)}
+              />
+              {nomeInput.length > 3 && (!nomeInput.includes("$") || !nomeInput.includes("@")) && (
+                <p className="mt-2 text-xs text-red-600">
+                  Formato inválido. E-mails válidos devem conter o símbolo especial obrigatório &quot;$&quot;.
+                </p>
+              )}
+            </div>
+          )}
+
+          {step === 4 && (
+            <div>
+              <label className="block text-xl font-bold mb-1 text-black">
+                Telefone (opcional, mas obrigatório)
+              </label>
+              <p className="text-xs text-gray-400 mb-2">Digite os números por extenso, separados por espaço (ex: &quot;seis nove nove meia meia...&quot;)</p>
+              <input
+                type="text"
+                autoComplete="off"
+                placeholder="zero oito zero zero..."
+                className="w-full p-4 text-lg border-4 border-blue-500 bg-white text-black focus:border-red-500 outline-none"
+                value={telefone}
+                onChange={(e) => setTelefone(e.target.value)}
               />
             </div>
-          </div>
+          )}
 
+          {step === 4 && (
+            <div className="text-[9px] text-gray-400 leading-relaxed border-t-2 pt-4">
+              <p className="font-bold mb-1">§ 47-B — Consentimento para Coleta de Dados:</p>
+              <p>Ao preencher este formulário, você concorda que seus dados poderão ser utilizados para fins educacionais, comerciais, espaciais, e quaisquer outros fins que inventarmos nos próximos 300 anos. Você também concorda em ser contatado por carta postal, pombo-correio, e telepatia. O não preenchimento de qualquer campo resultará em consequências que preferimos não especificar neste momento. A empresa reserva-se o direito de mudar estes termos sem aviso, no meio de uma frase.</p>
+            </div>
+          )}
 
-          {/* Phone in full text */}
-          <div>
-            <label className="block text-xl font-bold mb-1 text-black">
-              Telefone (opcional, mas obrigatório)
-            </label>
-            <p className="text-xs text-gray-400 mb-2">Digite os números por extenso, separados por espaço (ex: &quot;seis nove nove meia meia...&quot;)</p>
-            <input
-              type="text"
-              autoComplete="off"
-              placeholder="zero oito zero zero..."
-              className="w-full p-4 text-lg border-4 border-blue-500 bg-white text-black focus:border-red-500 outline-none"
-              value={telefone}
-              onChange={(e) => setTelefone(e.target.value)}
-            />
-          </div>
-
-          {/* Terms nobody will read */}
-          <div className="text-[9px] text-gray-400 leading-relaxed border-t-2 pt-4">
-            <p className="font-bold mb-1">§ 47-B — Consentimento para Coleta de Dados:</p>
-            <p>Ao preencher este formulário, você concorda que seus dados poderão ser utilizados para fins educacionais, comerciais, espaciais, e quaisquer outros fins que inventarmos nos próximos 300 anos. Você também concorda em ser contatado por carta postal, pombo-correio, e telepatia. O não preenchimento de qualquer campo resultará em consequências que preferimos não especificar neste momento. A empresa reserva-se o direito de mudar estes termos sem aviso, no meio de uma frase.</p>
-          </div>
-
-          {/* Spacer to force scrolling */}
-          <div className="h-48 bg-yellow-100 flex items-center justify-center border-4 border-dashed border-gray-400">
-            <p className="text-gray-500 text-sm text-center">
-              ⬇ Role até o final da página para desbloquear o botão &quot;Próximo&quot; ⬇
-              <br/>
-              <span className="text-xs opacity-50">(Não indicaremos quando você chegar lá)</span>
-            </p>
-          </div>
+          {step === 4 && (
+            <div className="h-48 bg-yellow-100 flex items-center justify-center border-4 border-dashed border-gray-400">
+              <p className="text-gray-500 text-sm text-center">
+                ⬇ Role até o final da página para desbloquear o botão &quot;Próximo&quot; ⬇
+                <br />
+                <span className="text-xs opacity-50">(Não indicaremos quando você chegar lá)</span>
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Error message - vague on purpose */}
@@ -259,17 +315,26 @@ export default function DadosPessoaisPage() {
           </div>
         )}
 
-        <div className="mt-6 sm:mt-10 flex flex-col sm:flex-row gap-4 justify-between" ref={bottomRef}>
+        <div className="mt-6 sm:mt-10 flex flex-col sm:flex-row gap-4 justify-between" ref={bottomActionRef}>
+          {step > 1 && (
+            <button
+              type="button"
+              onClick={goPreviousStep}
+              className="px-12 py-4 text-2xl font-black uppercase border-4 border-black bg-white text-black transition-all hover:bg-black hover:text-white cursor-pointer"
+            >
+              ← VOLTAR
+            </button>
+          )}
           <button
+            type="button"
             onClick={handleNext}
-            disabled={!hasScrolled}
-            className={`px-12 py-4 text-2xl font-black uppercase border-4 border-black transition-all ${
-              hasScrolled
-                ? "bg-[#00ff08] text-black hover:bg-black hover:text-[#00ff08] cursor-pointer"
-                : "bg-gray-300 text-gray-500 cursor-not-allowed opacity-50"
-            }`}
+            disabled={!isPrimaryActionEnabled}
+            className={`px-12 py-4 text-2xl font-black uppercase border-4 border-black transition-all ${isPrimaryActionEnabled
+              ? "bg-[#00ff08] text-black hover:bg-black hover:text-[#00ff08] cursor-pointer"
+              : "bg-gray-300 text-gray-500 cursor-not-allowed opacity-50"
+              }`}
           >
-            {hasScrolled ? "PRÓXIMO →" : "??? →"}
+            {isPrimaryActionEnabled ? "PRÓXIMO →" : "??? →"}
           </button>
         </div>
       </div>
