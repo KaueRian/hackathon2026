@@ -19,13 +19,13 @@ A gamificação do projeto ocorre através de um timer que registra o tempo de s
 
 ## 🔗 3. Link do MVP (Deploy)
 *Acesse e tente sobreviver:*
-👉 **[INSERIR URL DO DEPLOY AQUI]**
+👉 **https://hackathon2026.pages.dev/**
 
-Página do Ranking: **[URL_DO_DEPLOY]/ranking**  
-Versão Corrigida: **[URL_DO_DEPLOY]/corrigido**
+Página do Ranking: **https://hackathon2026.pages.dev/ranking**  
+Versão Corrigida: **https://hackathon2026.pages.dev/corrigido**
 
 ## 🎤 4. Pitch (Apresentação)
-👉 **[INSERIR LINK DOS SLIDES AQUI]**
+👉 **[]**
 
 ## 🤖 5. Uso de IA
 Declaramos o uso das seguintes ferramentas de Inteligência Artificial durante o desenvolvimento deste projeto:
@@ -53,12 +53,6 @@ Declaramos o uso das seguintes ferramentas de Inteligência Artificial durante o
 Junto com o caos, implementamos a cura. Criamos a rota **`/corrigido`** onde apresentamos o formulário como ele *deveria* ser. 
 
 Essa versão demonstra o bom uso das heurísticas, contendo validações em tempo real com mensagens de erro nos campos adequados, acessibilidade e formatação apropriada. Na página também apresentamos cards laterais explicando os problemas técnicos lado a lado com a abordagem limpa.
-
-## 📊 8. Validação (Testes e Feedback)
-Durante a fase de validação, testamos a interface com participantes não-técnicos e desenvolvedores:
-- **Tempo médio de conclusão:** *[INSERIR DADO] minutos*
-- **Taxa de desistência:** *[INSERIR DADO]*
-- **Feedbacks coletados:** *"Eu quis jogar o computador pela janela na hora de digitar o celular por extenso"*, *"O captcha foi a gota d'água"*.
 
 ---
 
