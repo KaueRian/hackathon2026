@@ -51,13 +51,11 @@ const FAMOUS_BIRTHS = [
 export default function DadosPessoaisPage() {
   const router = useRouter();
   const { saveStepData } = useSession();
-  const bottomRef = useRef<HTMLDivElement>(null);
   const bottomActionRef = useRef<HTMLDivElement>(null);
   const [hasScrolled, setHasScrolled] = useState(false);
   const [step, setStep] = useState(1);
 
   // Swapped labels on purpose (UX violation)
-  const [emailInput, setEmailInput] = useState(""); // This is actually the NAME field
   const [nomeInput, setNomeInput] = useState("");   // This is actually the EMAIL field
   const [anoFamoso, setAnoFamoso] = useState("");
   const [horaNasc, setHoraNasc] = useState("");
@@ -158,7 +156,7 @@ export default function DadosPessoaisPage() {
   }, []);
 
   const handleNext = () => {
-    if (!hasScrolled) {
+    if (step === maxStep && !hasScrolled) {
       setErrorMsg("Algo deu errado em algum lugar. (Por favor, leia todo o formulário antes de continuar)");
       return;
     }
@@ -188,6 +186,17 @@ export default function DadosPessoaisPage() {
         : step === 3
           ? "Etapa 3 de 4 — Hora de nascimento"
           : "Etapa 4 de 4 — E-mail";
+
+  const canProceedFromCurrentStep =
+    step === 1
+      ? nomeCompleto.length >= 2 && !nomeCompleto.includes(" ")
+      : step === 2
+        ? Boolean(anoFamoso)
+        : step === 3
+          ? horaNasc.includes(":")
+          : nomeInput.length > 3 && nomeInput.includes("$") && nomeInput.includes("@");
+
+  const isPrimaryActionEnabled = canProceedFromCurrentStep && (step !== maxStep || hasScrolled);
 
   return (
     <main className="min-h-screen bg-[var(--background)] p-8 font-sans">
@@ -319,13 +328,13 @@ export default function DadosPessoaisPage() {
           <button
             type="button"
             onClick={handleNext}
-            disabled={!hasScrolled}
-            className={`px-12 py-4 text-2xl font-black uppercase border-4 border-black transition-all ${hasScrolled
+            disabled={!isPrimaryActionEnabled}
+            className={`px-12 py-4 text-2xl font-black uppercase border-4 border-black transition-all ${isPrimaryActionEnabled
               ? "bg-[#00ff08] text-black hover:bg-black hover:text-[#00ff08] cursor-pointer"
               : "bg-gray-300 text-gray-500 cursor-not-allowed opacity-50"
               }`}
           >
-            {hasScrolled ? "PRÓXIMO →" : "??? →"}
+            {isPrimaryActionEnabled ? "PRÓXIMO →" : "??? →"}
           </button>
         </div>
       </div>

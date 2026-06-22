@@ -1,4 +1,4 @@
-import { renderHook, act } from '@testing-library/react';
+import { renderHook } from '@testing-library/react';
 import { useTimer } from '@/hooks/useTimer';
 import { useSession } from '@/lib/sessionStore';
 
@@ -29,7 +29,7 @@ describe('useTimer', () => {
     const mockStartedAt = Date.now();
     (useSession as jest.Mock).mockReturnValue({ session: { startedAt: mockStartedAt } });
     const { result } = renderHook(() => useTimer());
-    
+
     expect(result.current.isRunning).toBe(true);
     expect(result.current.formattedTime).toMatch(/\d{2}:\d{2}/);
   });

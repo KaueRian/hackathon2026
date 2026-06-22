@@ -1,7 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import * as d3 from "d3-scale";
+import { useCallback, useMemo, useRef } from "react";
 
 type TimeValue = {
     hours: number;
@@ -11,6 +10,10 @@ type TimeValue = {
 type BirthTimeClockProps = {
     value: string;
     onChange: (value: string) => void;
+};
+
+type LinearScale = ((input: number) => number) & {
+    invert: (output: number) => number;
 };
 
 const clockStyle = {
@@ -83,21 +86,22 @@ function formatTime(hours: number, minutes: number) {
     return `${String(displayHours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
 }
 
+function createLinearScale(domainStart: number, domainEnd: number, rangeStart: number, rangeEnd: number): LinearScale {
+    const domainSpan = domainEnd - domainStart;
+    const rangeSpan = rangeEnd - rangeStart;
+
+    const scale = ((input: number) => rangeStart + ((input - domainStart) / domainSpan) * rangeSpan) as LinearScale;
+    scale.invert = (output: number) => domainStart + ((output - rangeStart) / rangeSpan) * domainSpan;
+    return scale;
+}
+
 export default function BirthTimeClock({ value, onChange }: BirthTimeClockProps) {
-    const initialTime = parseTime(value);
-    const [hours, setHours] = useState(initialTime.hours);
-    const [minutes, setMinutes] = useState(initialTime.minutes);
     const clockRef = useRef<HTMLDivElement>(null);
 
-    const minuteScale = useMemo(() => d3.scaleLinear().domain([0, 60]).range([0, 360]), []);
-    const hourScale = useMemo(() => d3.scaleLinear().domain([0, 12]).range([0, 360]), []);
+    const minuteScale = useMemo(() => createLinearScale(0, 60, 0, 360), []);
+    const hourScale = useMemo(() => createLinearScale(0, 12, 0, 360), []);
 
-    useEffect(() => {
-        if (!value) return;
-        const nextTime = parseTime(value);
-        setHours(nextTime.hours);
-        setMinutes(nextTime.minutes);
-    }, [value]);
+    const { hours, minutes } = parseTime(value);
 
     const minuteAngle = minuteScale(minutes);
     const hourAngle = hourScale(hours % 12) + (minutes / 60) * 30;
@@ -112,7 +116,7 @@ export default function BirthTimeClock({ value, onChange }: BirthTimeClockProps)
         const deltaX = clientX - centerX;
         const deltaY = clientY - centerY;
 
-        let angleRad = Math.atan2(deltaY, deltaX);
+        const angleRad = Math.atan2(deltaY, deltaX);
         let angleDeg = (angleRad * 180) / Math.PI;
 
         angleDeg = (angleDeg + 90 + 360) % 360;
@@ -121,8 +125,6 @@ export default function BirthTimeClock({ value, onChange }: BirthTimeClockProps)
 
     const updateTime = useCallback(
         (nextHours: number, nextMinutes: number) => {
-            setHours(nextHours);
-            setMinutes(nextMinutes);
             onChange(formatTime(nextHours, nextMinutes));
         },
         [onChange],
@@ -137,17 +139,18 @@ export default function BirthTimeClock({ value, onChange }: BirthTimeClockProps)
                 if (moveEvent.pointerId !== pointerId) return;
 
                 const angle = calculateAngleFromPoint(moveEvent.clientX, moveEvent.clientY);
+                const currentTime = parseTime(value);
 
                 if (type === "minute") {
                     const nextMinutes = Math.round(minuteScale.invert(angle)) % 60;
-                    updateTime(hours, nextMinutes < 0 ? nextMinutes + 60 : nextMinutes);
+                    updateTime(currentTime.hours, nextMinutes < 0 ? nextMinutes + 60 : nextMinutes);
                     return;
                 }
 
-                const hourAngleOnly = angle - (minutes / 60) * 30;
+                const hourAngleOnly = angle - (currentTime.minutes / 60) * 30;
                 let nextHours = Math.round(hourScale.invert(hourAngleOnly));
                 nextHours = (nextHours + 12) % 12;
-                updateTime(nextHours, minutes);
+                updateTime(nextHours, currentTime.minutes);
             };
 
             const onUp = (endEvent: PointerEvent) => {
@@ -161,7 +164,7 @@ export default function BirthTimeClock({ value, onChange }: BirthTimeClockProps)
             document.addEventListener("pointerup", onUp);
             document.addEventListener("pointercancel", onUp);
         },
-        [calculateAngleFromPoint, hourScale, hours, minuteScale, minutes, updateTime],
+        [calculateAngleFromPoint, hourScale, minuteScale, updateTime, value],
     );
 
     return (
