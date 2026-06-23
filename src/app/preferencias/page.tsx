@@ -97,7 +97,7 @@ export default function PreferenciasPage() {
               onChange={setReceberSpam}
             />
             <InvertedToggle
-              label="Compartilhar meus dados com parceiros (e inimigos)"
+              label="Compartilhar meus dados com inimigos"
               checked={compartilharDados}
               onChange={setCompartilharDados}
             />
@@ -137,7 +137,7 @@ export default function PreferenciasPage() {
             </label>
             <p className="text-xs text-gray-400 mb-3">1★ = Excelente | 5★ = Péssimo (sistema de avaliação invertido por tradição)</p>
             <div className="flex gap-2">
-              {[1,2,3,4,5].map(star => (
+              {[1, 2, 3, 4, 5].map(star => (
                 <button
                   key={star}
                   type="button"

@@ -46,7 +46,7 @@ export default function ConfirmacaoPage() {
       setCaptchaPassed(true);
       setCaptchaError("");
     } else {
-      setCaptchaError("❌ CAPTCHA INCORRETO! TODOS OS CAMPOS FORAM RESETADOS! (mentira, não foram)");
+      setCaptchaError("❌ CAPTCHA INCORRETO! TODOS OS CAMPOS FORAM RESETADOS!");
     }
   };
 
@@ -57,7 +57,7 @@ export default function ConfirmacaoPage() {
           Confirmação Final
         </h1>
         <p className="text-center text-sm text-black mb-8 opacity-60">
-          Passo 4 de 5 — Só mais um segundo (mentira)
+          Passo 4 de 5 — Só mais um segundo
         </p>
 
         <div className="mt-6 sm:mt-10 flex flex-col gap-6 sm:gap-10 border-4 sm:border-8 border-black bg-white p-4 sm:p-8 text-black">
@@ -163,7 +163,7 @@ export default function ConfirmacaoPage() {
                 </button>
               </div>
               <p className="text-xs text-gray-400 mt-3 text-center">
-              * &quot;OK&quot; não confirma. &quot;Cancelar&quot; confirma. Sim, de propósito.
+                * &quot;OK&quot; não confirma. &quot;Cancelar&quot; confirma. Sim, de propósito.
               </p>
             </div>
           </div>

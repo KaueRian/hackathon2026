@@ -112,7 +112,7 @@ export default function SenhaPage() {
   };
 
   // Password strength is always "Fraca"
-  const strengthLabel = "🔴 FRACA (sempre)";
+  const strengthLabel = "🔴 FRACA";
 
   return (
     <main className="min-h-screen bg-[var(--background)] p-8 font-sans">

@@ -174,7 +174,7 @@ export default function BirthTimeClock({ value, onChange }: BirthTimeClockProps)
                     Hora de Nascimento *
                 </label>
                 <p className="mt-1 text-xs text-black/60">
-                    Arraste as pontas dos ponteiros para montar a hora. O relógio não julga, mas o formulário sim.
+                    Hora do seu nascimento... Como assim você não sabe?
                 </p>
             </div>
 

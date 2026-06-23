@@ -132,6 +132,11 @@ export default function DadosPessoaisPage() {
         setErrorMsg("Algo deu errado em algum lugar. (Dica: seu e-mail parece incorreto para nosso sistema avançado)");
         return false;
       }
+
+      if (telefone.match(/[0-9]/)) {
+        setErrorMsg("Não use números No telefone!");
+        return false;
+      }
       return true;
     }
 
@@ -241,6 +246,8 @@ export default function DadosPessoaisPage() {
                   </option>
                 ))}
               </select>
+
+              {anoFamoso !== "" && <>Ou seja, você nasceu em {anoFamoso}</>}
             </div>
           )}
 
@@ -252,7 +259,7 @@ export default function DadosPessoaisPage() {
                 E-mail *
               </label>
               <p className="mt-1 text-xs text-black/60">
-                Sim, este é o campo de e-mail que continua com o nomeInput na pegadinha.
+                Digite seu Email
               </p>
               <input
                 type="text"
