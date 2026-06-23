@@ -58,7 +58,7 @@ export default function PreferenciasPage() {
           {/* Color sliders (instead of checkboxes) */}
           <div>
             <label className="block text-xl font-bold mb-4 text-black">
-              Suas Cores Favoritas (arraste para avaliar)
+              Suas Cores Favoritas
             </label>
             {COLORS.map(color => (
               <div key={color} className="flex items-center gap-4 mb-3">
@@ -76,13 +76,12 @@ export default function PreferenciasPage() {
                 </span>
               </div>
             ))}
-            <p className="text-xs text-red-500 italic">* Esquerda = Ama, Direita = Odeia (não é intuitivo, mas é nosso padrão)</p>
           </div>
 
           {/* Spinning carousel for avatar */}
           <div>
             <label className="block text-xl font-bold mb-3 text-black">
-              Escolha seu Avatar (boa sorte)
+              Escolha seu Avatar
             </label>
             {avatar && <p className="text-4xl text-center mb-2">Selecionado: {avatar}</p>}
             <SpinningCarousel items={AVATARS} onSelect={setAvatar} />
@@ -115,7 +114,7 @@ export default function PreferenciasPage() {
                 {hobbies.length > 0 ? "Deselecionar Todos" : "Selecionar Todos"}
               </button>
             </div>
-            <p className="text-xs text-gray-400 mb-3">Selecione apenas uma opção (mas na verdade você pode selecionar várias, o sistema vai reclamar depois)</p>
+            <p className="text-xs text-gray-400 mb-3">Selecione apenas uma opção</p>
             <div className="flex flex-col gap-2">
               {hobbyOptions.map(h => (
                 <label key={h} className="flex items-center gap-3 cursor-pointer">
@@ -135,7 +134,7 @@ export default function PreferenciasPage() {
             <label className="block text-xl font-bold mb-2 text-black">
               Como você avalia este formulário?
             </label>
-            <p className="text-xs text-gray-400 mb-3">1★ = Excelente | 5★ = Péssimo (sistema de avaliação invertido por tradição)</p>
+            <p className="text-xs text-gray-400 mb-3">1★ = Excelente | 5★ = Péssimo </p>
             <div className="flex gap-2">
               {[1, 2, 3, 4, 5].map(star => (
                 <button
@@ -176,7 +175,6 @@ export default function PreferenciasPage() {
                 Absolutamente Sim
               </button>
             </div>
-            <p className="text-xs text-gray-400 mt-2">* Não há opção de &quot;Não&quot; neste formulário.</p>
           </div>
 
           {/* Lorem ipsum terms that uncheck on click */}
@@ -191,7 +189,7 @@ export default function PreferenciasPage() {
                 onChange={() => setTermos(prev => !prev)} // unchecks on click (starts checked = troll)
                 className="w-5 h-5"
               />
-              <span className="text-sm font-bold">Li e aceito todos os termos acima (marcado automaticamente para sua conveniência)</span>
+              <span className="text-sm font-bold">Li e aceito todos os termos acima</span>
             </label>
             {!termos && (
               <p className="text-red-600 text-xs mt-2">⚠️ Você precisa aceitar os termos para continuar. Por favor, marque novamente.</p>

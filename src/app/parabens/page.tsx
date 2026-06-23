@@ -123,12 +123,10 @@ export default function ParabensPage() {
               </thead>
               <tbody>
                 {ranking.map((r, i) => {
-                  // Scramble the nickname letters (UX violation: wrong data display)
-                  const scrambled = r.nickname.split("").sort(() => Math.random() - 0.5).join("");
                   return (
                     <tr key={i} className="border-b border-gray-200">
                       <td className="py-2 font-bold">{i + 1}</td>
-                      <td className="py-2 font-mono">{scrambled}</td>
+                      <td className="py-2 font-mono">{r.nickname}</td>
                       <td className="py-2 text-right font-mono">{formatTime(r.duration_seconds)}</td>
                     </tr>
                   );

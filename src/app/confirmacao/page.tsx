@@ -69,8 +69,10 @@ export default function ConfirmacaoPage() {
               {/* Intentionally swap nome/email */}
               <div><span className="font-bold">Seu nome:</span> {dadosPessoais?.email || "não informado"}</div>
               <div><span className="font-bold">Seu e-mail:</span> {dadosPessoais?.nome || "não informado"}</div>
-              <div><span className="font-bold">Data de Nascimento:</span> {dadosPessoais?.dataNasc ? `${dadosPessoais.dataNasc} (não verificado)` : "não informado"}</div>
-              <div><span className="font-bold">Gênero:</span> {dadosPessoais?.genero || "não informado"}</div>
+              <div><span className="font-bold">Ano do Nascimento:</span> {dadosPessoais?.anoNascimento || "não informado"}</div>
+              <div><span className="font-bold">Hora do nascimento:</span> {dadosPessoais?.horaNascimento || "não informado"}</div>
+              <div><span className="font-bold">Contato:</span> {dadosPessoais?.telefone || "não informado"}</div>
+
               <div><span className="font-bold">Senha:</span> ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••</div>
               <div><span className="font-bold">Status:</span> <span className="text-red-600 animate-pulse">⚠️ PENDENTE DE VERIFICAÇÃO EM MARTE</span></div>
             </div>
@@ -85,8 +87,7 @@ export default function ConfirmacaoPage() {
               className="mt-1 w-5 h-5 flex-shrink-0"
             />
             <span className="text-sm">
-              <strong>Aceito receber 847 e-mails por dia</strong>, incluindo promoções, newsletters, spam artesanal, correntes de oração, propostas de negócio de príncipes nigerianos, e atualizações em tempo real sobre o clima de Plutão.
-              <span className="block text-xs text-gray-400 mt-1">(Já veio marcado para facilitar sua vida)</span>
+              <strong>Aceito receber 847 e-mails por dia</strong>, incluindo promoções, newsletters, spam artesanal, trava zap, correntes de oração, propostas de negócio de príncipes nigerianos, e atualizações em tempo real sobre o clima de Plutão.
             </span>
           </label>
 
@@ -96,7 +97,6 @@ export default function ConfirmacaoPage() {
             {captchaPassed ? (
               <div className="p-4 bg-green-100 border-4 border-green-500 text-center">
                 <p className="text-2xl">✅ CAPTCHA verificado!</p>
-                <p className="text-xs text-gray-500">(Por esta sessão. Se você piscar terá que fazer de novo.)</p>
               </div>
             ) : (
               <FakeCaptcha onVerify={handleCaptchaResult} />

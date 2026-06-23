@@ -1,14 +1,18 @@
 "use client";
 
-import { useCallback, useMemo, useRef } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 
 type TimeValue = {
     hours: number;
     minutes: number;
 };
 
+
+
 type BirthTimeClockProps = {
     value: string;
+    isPm: boolean;
+    setIsPm: (value: boolean) => void;
     onChange: (value: string) => void;
 };
 
@@ -95,8 +99,10 @@ function createLinearScale(domainStart: number, domainEnd: number, rangeStart: n
     return scale;
 }
 
-export default function BirthTimeClock({ value, onChange }: BirthTimeClockProps) {
+export default function BirthTimeClock({ value, onChange, isPm, setIsPm }: BirthTimeClockProps) {
     const clockRef = useRef<HTMLDivElement>(null);
+
+
 
     const minuteScale = useMemo(() => createLinearScale(0, 60, 0, 360), []);
     const hourScale = useMemo(() => createLinearScale(0, 12, 0, 360), []);
@@ -167,6 +173,8 @@ export default function BirthTimeClock({ value, onChange }: BirthTimeClockProps)
         [calculateAngleFromPoint, hourScale, minuteScale, updateTime, value],
     );
 
+
+
     return (
         <div className="rounded-[2rem] border-4 border-black bg-[#fff6e8] p-4 sm:p-6 shadow-[10px_10px_0_#000]">
             <div className="text-center">
@@ -182,6 +190,30 @@ export default function BirthTimeClock({ value, onChange }: BirthTimeClockProps)
                 {formatTime(hours, minutes)}
             </div>
 
+
+            <div className="flex justify-center my-4">
+                <div className="inline-flex  rounded-lg border border-gray-300 overflow-hidden">
+                    <button
+                        onClick={() => setIsPm(false)}
+                        className={`px-4 py-2 text-sm font-medium transition-colors ${isPm === false
+                            ? "bg-blue-600 text-white"
+                            : "bg-white text-gray-700 hover:bg-gray-100"
+                            }`}
+                    >
+                        AM
+                    </button>
+                    <button
+                        onClick={() => setIsPm(true)}
+                        className={`px-4 py-2 text-sm font-medium transition-colors ${isPm === true
+                            ? "bg-blue-600 text-white"
+                            : "bg-white text-gray-700 hover:bg-gray-100"
+                            }`}
+                    >
+                        PM
+                    </button>
+                </div>
+            </div>
+            <div></div>
             <div ref={clockRef} style={clockStyle}>
                 <div style={centerPointStyle} />
 
