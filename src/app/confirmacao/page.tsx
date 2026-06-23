@@ -152,19 +152,17 @@ export default function ConfirmacaoPage() {
                   onClick={handleCancelConfirm}
                   className="px-8 py-3 bg-green-500 text-white font-black text-xl border-4 border-black"
                 >
-                  OK
+                  CANCELAR
                 </button>
                 {/* Cancelar = confirms */}
                 <button
                   onClick={handleRealConfirm}
                   className="px-8 py-3 bg-red-500 text-white font-black text-xl border-4 border-black"
                 >
-                  Cancelar
+                  OK
                 </button>
               </div>
-              <p className="text-xs text-gray-400 mt-3 text-center">
-                * &quot;OK&quot; não confirma. &quot;Cancelar&quot; confirma. Sim, de propósito.
-              </p>
+
             </div>
           </div>
         )}
