@@ -1,6 +1,6 @@
 # 😈 FormHell - O Cadastro Impossível
 
-> **Projeto submetido para o Hackathon IFRO 2026 desenvolvido por Gabriel e Kauê Rian Silva Conceição Oliveira**
+> **Projeto submetido para o Hackathon IFRO 2026 desenvolvido por Gabriel de Oliveira Silva e Kauê Rian Silva Conceição Oliveira**
 
 O **FormHell** é uma aplicação interativa que subverte propositalmente todas as regras e boas práticas de UX/UI para criar a pior experiência de usuário possível. O objetivo é pedagógico: ao sentir na pele as frustrações geradas por uma interface hostil, desenvolvedores e designers aprendem a importância da empatia e do design centrado no usuário.
 
