@@ -21,10 +21,8 @@ export function SpinningCarousel({
           </button>
         ))}
       </div>
-      
-      <div className="absolute bottom-2 right-2 text-white text-xs opacity-50">
-        Tente clicar na sua preferência se for capaz.
-      </div>
+
+
     </div>
   );
 }

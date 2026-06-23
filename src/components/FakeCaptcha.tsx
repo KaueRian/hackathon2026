@@ -79,14 +79,11 @@ export function FakeCaptcha({ onVerify }: { onVerify: (success: boolean) => void
       </div>
 
       <div className="flex justify-between items-center border-t pt-4">
-        <div className="text-xs text-gray-500">
-          reCAPTCHA Troll<br />
-          Privacidade - Nenhuma
-        </div>
+
         <button
           type="button"
           onClick={handleVerify}
-          className="bg-blue-600 text-white px-6 py-2 font-bold hover:bg-blue-700"
+          className=" grow bg-blue-600 text-white px-6 py-2 font-bold hover:bg-blue-700"
         >
           VERIFICAR
         </button>

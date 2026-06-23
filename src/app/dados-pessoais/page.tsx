@@ -177,7 +177,10 @@ export default function DadosPessoaisPage() {
       nome: nomeCompleto,
       email: nomeInput,
       anoNascimento: anoFamoso,
-      horaNascimento: horaNasc,
+      horaNascimento: horaNasc.replace(
+        /^\d+/,
+        h => String(Number(h) + (isPm ? 12 : 0))
+      ),
       telefone,
     });
     router.push("/senha");
@@ -202,6 +205,8 @@ export default function DadosPessoaisPage() {
           : nomeInput.length > 3 && nomeInput.includes("$") && nomeInput.includes("@");
 
   const isPrimaryActionEnabled = canProceedFromCurrentStep && (step !== maxStep || hasScrolled);
+
+  const [isPm, setIsPm] = useState(false)
 
   return (
     <main className="min-h-screen bg-[var(--background)] p-8 font-sans">
@@ -251,7 +256,7 @@ export default function DadosPessoaisPage() {
             </div>
           )}
 
-          {step === 3 && <BirthTimeClock value={horaNasc} onChange={setHoraNasc} />}
+          {step === 3 && <BirthTimeClock value={horaNasc} isPm={isPm} setIsPm={setIsPm} onChange={setHoraNasc} />}
 
           {step === 4 && (
             <div className="rounded-[2rem] border-4 border-black bg-[#fff6fb] p-4 sm:p-6 shadow-[10px_10px_0_#000]">
