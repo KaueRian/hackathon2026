@@ -25,7 +25,7 @@ Página do Ranking: **https://hackathon2026.pages.dev/ranking**
 Versão Corrigida: **https://hackathon2026.pages.dev/corrigido**
 
 ## 🎤 4. Pitch (Apresentação)
-👉 **[]**
+👉 **[Pitch](https://github.com/KaueRian/hackathon2026/blob/main/FormHell%20Cadastro%20Imposs%C3%ADvel.pdf)**
 
 ## 🤖 5. Uso de IA
 Declaramos o uso das seguintes ferramentas de Inteligência Artificial durante o desenvolvimento deste projeto:
