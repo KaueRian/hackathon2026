@@ -34,16 +34,23 @@ export default function ParabensClient() {
     if (!nickname.trim()) return;
     setSaving(true);
 
-    // elapsed from useTimer is already in SECONDS — do NOT divide by 1000 again
+    // elapsed from useTimer is already in SECONDS
     const elapsedSeconds = elapsed;
 
-    const { error } = await supabase.from("sessions").insert({
-      nickname: nickname.trim(),
-      duration_seconds: elapsedSeconds,
+    // INSERT via Cloudflare Pages Function (/api/ranking)
+    // A service_role key fica segura no servidor da Cloudflare, nunca no browser
+    const res = await fetch("/api/ranking", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        nickname: nickname.trim(),
+        duration_seconds: elapsedSeconds,
+      }),
     });
 
-    if (error) {
-      console.error("Erro ao salvar no ranking:", error.message);
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      console.error("Erro ao salvar no ranking:", (data as { error?: string }).error ?? res.statusText);
     }
 
     setSaved(true);
