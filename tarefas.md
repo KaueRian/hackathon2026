@@ -260,6 +260,49 @@
 
 ---
 
+## Fase 16 — Segurança: Chaves e RLS (Supabase + Cloudflare)
+
+> **Contexto:** Atualmente o `INSERT` e `UPDATE` do Supabase estão abertos para qualquer pessoa via RLS, e toda a comunicação com o banco usa a `NEXT_PUBLIC_SUPABASE_ANON_KEY` (exposta no navegador). Qualquer pessoa pode enviar um tempo falso de `0.001s` e liderar o ranking.
+
+### 16.1 — Corrigir as políticas RLS no Supabase
+- [X] Acessar o painel do Supabase → SQL Editor e **remover** as políticas de INSERT e UPDATE públicas:
+  ```sql
+  DROP POLICY "Anyone can insert" ON sessions;
+  DROP POLICY "Anyone can update own" ON sessions;
+  ```
+- [X] Manter apenas a política de leitura pública (o ranking ainda deve ser visível):
+  ```sql
+  -- Esta política deve continuar existindo:
+  -- CREATE POLICY "Anyone can read" ON sessions FOR SELECT USING (true);
+  ```
+- [X] Verificar no painel que nenhum `INSERT` direto com a `anon key` consegue mais ser feito
+
+### 16.2 — Adicionar a `service_role key` no ambiente (servidor apenas)
+- [x] Acessar o painel do Supabase → Project Settings → API e copiar a **Service Role Key**
+- [x] Adicionar a chave no `.env.local` **sem** o prefixo `NEXT_PUBLIC_`:
+  ```
+  SUPABASE_SERVICE_ROLE_KEY=sua_service_role_key_aqui
+  ```
+- [x] Adicionar a mesma variável no painel do **Cloudflare Pages** → Settings → Environment Variables (também sem `NEXT_PUBLIC_`)
+- [x] Atualizar o arquivo `.example.env` com o nome da nova variável (mas sem o valor real)
+
+### 16.3 — Criar cliente Supabase de servidor (`src/lib/supabaseServer.ts`)
+- [x] Criar o arquivo `src/lib/supabaseServer.ts` que usa a `SUPABASE_SERVICE_ROLE_KEY`
+  - Este arquivo só pode ser importado em Server Actions ou Route Handlers (nunca em componentes `"use client"`)
+  - Deve usar `createClient` com a service role key para ter permissão de bypassar o RLS
+
+### 16.4 — Criar Server Action para o INSERT do ranking (`src/app/actions/saveRanking.ts`)
+- [x] Criar o arquivo `src/app/actions/saveRanking.ts` marcado com `"use server"`
+- [x] A action deve receber `nickname` e `duration_seconds` do front-end
+- [x] Usar o cliente servidor (`supabaseServer.ts`) para fazer o `INSERT` na tabela `sessions`
+- [x] Adicionar validação básica dos dados recebidos (ex: `duration_seconds` deve ser número positivo, `nickname` não pode ser vazio ou muito longo)
+
+### 16.5 — Atualizar o front-end para usar a Server Action
+- [x] Em `src/app/parabens/_components/ParabensClient.tsx`, substituir o `supabase.from('sessions').insert(...)` direto pela chamada à Server Action `saveRanking(...)`
+- [x] Confirmar que o arquivo `src/lib/supabase.ts` (público) não é mais usado para nenhuma escrita, apenas leitura (SELECT do ranking)
+
+---
+
 ## Fase 15 — Apresentação (20-26/06)
 
 - [ ] Preparar slides para o pitch (26/06)
