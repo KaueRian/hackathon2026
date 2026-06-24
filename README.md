@@ -56,6 +56,30 @@ Essa versão demonstra o bom uso das heurísticas, contendo validações em temp
 
 ---
 
+## 🧪 8. Plano Mínimo de Teste
+
+Este plano de teste foi elaborado para validar a qualidade da solução, conforme os requisitos do edital e ancorado nos conceitos da disciplina de Teste de Software (BSTQB, 2023; COUTINHO; NASCIMENTO, 2025).
+
+### 8.1 Oráculo da Solução
+O oráculo da solução para o **FormHell** é o comportamento esperado de que as interações ocorram de acordo com as regras estabelecidas para cada componente (ex: cronômetro que reseta, validações de senha rigorosas, componentes hostis). Na versão **Corrigida**, o oráculo é o sucesso na submissão de um formulário que respeita as boas práticas e heurísticas de usabilidade, com validação de dados em tempo real.
+
+### 8.2 Casos de Caminho Feliz
+Os testes de caminho feliz (Happy Path) validam o fluxo principal onde as condições ideais são atendidas:
+- **CT-01 (FormHell):** O usuário atende a todos os requisitos absurdos de senha (como conter número romano e soma de primos), clica no botão "fujão" de submissão e conclui o cadastro, com o tempo sendo registrado corretamente no ranking.
+- **CT-02 (Corrigido):** O usuário insere dados válidos em todos os campos, recebe feedback visual positivo (sem bloqueios artificiais) e submete o formulário com sucesso na primeira tentativa.
+
+### 8.3 Casos de Caminho de Erro
+Os testes de caminho de erro (Sad/Error Path) asseguram o comportamento do sistema diante de entradas ou fluxos incorretos:
+- **CT-03 (FormHell):** O usuário submete a senha sem atender aos critérios ocultos. O sistema deve impedir o avanço e revelar apenas o próximo requisito faltante de forma vaga.
+- **CT-04 (Corrigido):** O usuário tenta enviar o formulário com campos obrigatórios em branco ou e-mail com formatação inválida. O sistema previne o erro (Heurística 5) alertando-o imediatamente com mensagens claras abaixo de cada campo afetado (Heurística 9).
+
+### 8.5 Articulação aos Conceitos da Disciplina
+A modelagem destes casos de teste e a própria automação via TDD (Jest) presente no repositório foram construídas com base na literatura de referência:
+- **BSTQB (2023):** Aplicação de técnicas de modelagem de teste para garantir a cobertura dos cenários (positivos e negativos) na avaliação da qualidade.
+- **COUTINHO; NASCIMENTO (2025):** Utilização sistemática dos testes para evidenciar que o software construído atende de fato aos critérios (e antitécnicas, no caso pedagógico) propostos pelo design.
+
+---
+
 ### Instalação (Rodar localmente)
 ```bash
 git clone https://github.com/KaueRian/hackathon2026.git
